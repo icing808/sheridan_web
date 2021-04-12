@@ -5,22 +5,25 @@ const router = express.Router();
 //create API
 router.post('/api/user/register',(req,res) => {
 	//there req.body In fact, the body parser middleware is used to parse the data sent by the front end
-	//Query name = req.body.name 
-	models.Login.find({name: req.body.name},(err,data) => {
+	//Query name = req.body.name
+    console.log("req---"+req.body); 
+	models.Login.find({email: req.body.email},(err,data) => {
 		if(err){
 			res.send({'status': 1002, 'message': 'Query failure', 'data': err});
 		}else{
-			console.log('Query success'+data)
+			console.log('Query success' + JSON.stringify(data))
 			//data : A collection with the same name in the returned database
 			if(data.length > 0){
 				res.send({'status': 1001, 'message': 'The user name is already registered！'});
 			}else{
-				let newName = new models.Login({
+				let newEmail = new models.Login({
                     name : req.body.name,
-                    password : req.body.password
+                    email : req.body.email,
+                    password : req.body.password,
+                    role_id : 2
                 });
                 //newName.save insert to table
-                newName.save((err,data) => {
+                newEmail.save((err,data) => {
                     if (err) {
                         res.send({'status': 1002, 'message': 'Sign up failure！', 'data': err});
                     } else {
@@ -33,7 +36,7 @@ router.post('/api/user/register',(req,res) => {
 })
 //signIn api
 router.post('/api/user/login',(req,res) => {
-	models.Login.find({name: req.body.name, password: req.body.password},(err,data) => {
+	models.Login.find({email: req.body.email, password: req.body.password},(err,data) => {
 		if (err) {
             // res.send(err);
             res.send({'status': 1002, 'message': 'Failed to query database!', 'data': err});

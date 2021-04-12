@@ -13,7 +13,20 @@ db.once('open',() => console.log('Mongo connection successed'));
 //1.Schema  is the table structure
 const loginSchema = mongoose.Schema({
   name : String,
-  password : String
+  password : String,
+  email: String,
+  role_id: Number,
+  created_on:{
+    type: Date,
+    default: Date.now
+  },
+  modified_on:{
+    type: Date,
+    default: Date.now
+  }
+}, {
+  versionKey: false,
+  timestamps: { createdAt: 'created_on', updatedAt: 'modified_on' }
 });
 /*2.Model It is constructed by schema. In addition to the database skeleton defined by schema, 
 * it can also operate the database concretely.

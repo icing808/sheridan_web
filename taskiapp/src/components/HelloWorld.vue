@@ -4,7 +4,13 @@
     <!-- <h2>Essential Links</h2> -->
     <ul>
       <li>
-        <router-link to="/Login">Sign In/Up</router-link>
+        <router-link to="/Login">Sign In</router-link>
+      </li>
+      <li>
+        <router-link to="/SignUp">Sign Up</router-link>
+      </li>
+      <li>
+        <router-link to="/UserList">Query User</router-link>
       </li>
       <li>
         <router-link to="/AddTask">Add Task</router-link>
