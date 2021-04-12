@@ -6,6 +6,9 @@
       <li>
         <router-link to="/Login">Sign In/Up</router-link>
       </li>
+      <li>
+        <router-link to="/AddTask">Add Task</router-link>
+      </li>
       <!-- <li>
         <a
           href="https://vuejs.org"
