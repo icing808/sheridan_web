@@ -7,6 +7,10 @@ import axios from 'axios'
 
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
+import { library } from '../node_modules/@fortawesome/fontawesome-svg-core'
+import { faUserSecret } from '../node_modules/@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '../node_modules/@fortawesome/vue-fontawesome'
+
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -15,6 +19,10 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
+
+library.add(faUserSecret)
+
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.prototype.$http = axios
 
