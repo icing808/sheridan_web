@@ -9,6 +9,7 @@ requireAll({
 })
 
 const User = mongoose.model('users');
+const Task = mongoose.model('task');
 
 
 //connect to mongodb default: mongodb://127.0.0.1:27017/test

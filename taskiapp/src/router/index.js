@@ -6,6 +6,8 @@ import Login from '@/components/Login'
 import AddTask from '@/components/AddTask'
 import SignUp from '@/components/SignUp'
 import UserList from '@/components/UserList'
+import TaskList from '@/components/TaskList'
+import AddTask2 from '@/components/AddTask2'
 
 Vue.use(Router)
 
@@ -16,7 +18,7 @@ export default new Router({
       name: 'Welcome',
       component: Welcome
     },{
-      path: '/',
+      path: '/Home',
       name: 'HelloWorld',
       component: HelloWorld
     },{
@@ -35,6 +37,14 @@ export default new Router({
       path: "/UserList",
       name: "UserList",
       component: UserList
+    },{
+      path: "/TaskList",
+      name: "TaskList",
+      component: TaskList
+    },{
+      path: "/AddTask2",
+      name: "AddTask2",
+      component: AddTask2
     }
   ]
 })

@@ -1,9 +1,10 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
+    <h1>Hi, {{ this.GLOBAL.userName }}</h1>
     <!-- <h2>Essential Links</h2> -->
     <ul>
-      <li>
+      <!-- <li>
         <router-link to="/Login">Sign In</router-link>
       </li>
       <li>
@@ -11,9 +12,12 @@
       </li>
       <li>
         <router-link to="/UserList">Query User</router-link>
+      </li> -->
+      <li>
+       <router-link to="/TaskList">Task List</router-link>
       </li>
       <li>
-        <router-link to="/AddTask">Add Task</router-link>
+        <router-link to="/AddTask2">Add Task</router-link>
       </li>
     </ul>
   </div>
