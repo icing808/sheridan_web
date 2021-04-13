@@ -1,23 +1,37 @@
 <template>
     <div class="SignUp">
-        <h1>Sign Up</h1>
-        <div>{{msg}}</div>
+        <b-button variant="outline-primary" @click="$router.go(-1)">            
+            <img src="../assets/back.png">
+        </b-button>
+        <h1>Hi~</h1>
+        <h3>Create a New Account :D</h3>
         <div>
-            Name：
-            <input type="text" v-model="name">
+            <img src="../assets/sign-up.png">
         </div>
         <div>
-            Email：
-            <input type="text" v-model="email">
+            <div>
+                <input type="text" placeholder="Name" v-model="name">
+            </div>
+            <div>
+                <input type="text" placeholder="Email" v-model="email">
+            </div>
+            <div>
+                <input type="text" placeholder="Password" v-model="password">
+            </div>
         </div>
         <div>
-            Password：
-            <input type="text" v-model="password">
+            <b-button @click="register">
+                Sign Up
+            </b-button>
         </div>
-        <button @click="register">Sign Up</button>
+        <div>
+            <b-button>
+                <router-link to="/Login">
+                    Login
+                </router-link>
+            </b-button>
+        </div>
 
-        <p><router-link to="/Login">Sign In</router-link></p>
-        <p><router-link to="/">Home</router-link></p>
     </div>
 </template>
 <script>

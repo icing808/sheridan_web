@@ -1,24 +1,42 @@
 <template>
     <div class="login">
-        <h1>Sign In</h1>
-        <div>{{msg}}</div>
-        <div>
-            Email：
-            <input type="text" v-model="email">
-        </div>
-        <div>
-            Password：
-            <input type="text" v-model="password">
-        </div>
-        <button @click="login">Sign In</button>
+        <b-button variant="outline-primary">
+            <router-link to="/">
+                <img src="../assets/back.png">
+            </router-link>
+        </b-button>
+        <h1>Welcome back</h1>
+        <h2>Please log in :)</h2>
 
+        <img src="../assets/login-pic.png">
+        <div>
+            <input type="text" placeholder="Email" v-model="email">
+        </div>
+        <div>
+            <input type="text" placeholder="Password" v-model="password">
+        </div>
+        <div>
+            <b-button @click="login">
+                Sign In
+            </b-button>
+        </div>
+        <div>
+            <a>Forget Password?</a>
+        </div>
+        <div>
+            <b-button variant="outline-primary" v-show="showSignUp">
+                <router-link to="/SignUp">
+                    CREATE ACCOUNT
+                </router-link> 
+            </b-button>
+        </div>
+        
+        <!-- CHECK -->
         <div v-show="showID">
             <p>Hello, {{name}}</p>
             <p>UserId：{{nameId}}</p>
         </div>
 
-         <p v-show="showSignUp"><router-link to="/SignUp">Sign Up</router-link></p>
-        <p><router-link to="/">Home</router-link></p>
     </div>
 </template>
 <script>
@@ -63,3 +81,9 @@ export default {
     }
 }
 </script>
+
+
+<style scoped>
+
+
+</style>
