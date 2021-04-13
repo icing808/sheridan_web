@@ -1,3 +1,4 @@
+const db = require('./db');
 const api = require('./api');
 //operate files，r/w doc
 const fs = require('fs');
