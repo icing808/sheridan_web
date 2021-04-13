@@ -1,5 +1,6 @@
 const db = require('./db');
 const api = require('./api');
+const taskApi = require('./task.api');
 //operate files，r/w doc
 const fs = require('fs');
 const path = require('path');
@@ -11,6 +12,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(api);
+app.use(taskApi);
 // express.static Used to handle static resources
 app.use(express.static(path.resolve(__dirname, '../dist')));
 
