@@ -13,7 +13,10 @@
         <router-link to="/UserList">Query User</router-link>
       </li>
       <li>
-        <router-link to="/AddTask">Add Task</router-link>
+        <router-link to="/TaskList">Task List</router-link>
+      </li>
+      <li>
+        <router-link to="/AddTask2">Add Task</router-link>
       </li>
       <!-- <li>
         <a

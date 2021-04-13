@@ -10,7 +10,7 @@
             </p>
         </div>
         
-        <button @click="getAll">Get All User</button>
+        <!-- <button @click="getAll">Get All User</button> -->
 
         <p><router-link to="/">Home</router-link></p>
     </div>
@@ -19,16 +19,7 @@
 export default {
     name: "UserList",
     data(){
-        return{
-            msg: '',
-            name: '',
-            array: [],
-            showAll: false
-        }
-    },
-    methods:{
-        getAll(){
-            this.$http.get('/api/user/all').then((res) => {
+        this.$http.get('/api/user/all').then((res) => {
                 console.log(res)
                 if(res.data.length>0){
                     this.showAll = true
@@ -40,7 +31,28 @@ export default {
             }).catch((err) => {
                 console.log(err)
             })
-        },
+        return{
+            msg: '',
+            name: '',
+            array: [],
+            showAll: false
+        }
+    },
+    methods:{
+        // getAll(){
+        //     this.$http.get('/api/user/all').then((res) => {
+        //         console.log(res)
+        //         if(res.data.length>0){
+        //             this.showAll = true
+        //             this.array = res.data
+        //         }else{
+        //             //alert("No this user！")
+        //             this.msg = "No this user！"
+        //         }
+        //     }).catch((err) => {
+        //         console.log(err)
+        //     })
+        // },
         deleteone(names){
             let params = {
                 name: names

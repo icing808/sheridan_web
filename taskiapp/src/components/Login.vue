@@ -52,6 +52,9 @@ export default {
                    this.nameId = res.data.data[0]._id
                    this.name = res.data.data[0].name
                    this.showSignUp = false;
+                   this.GLOBAL.userId = res.data.data[0]._id;
+                   this.GLOBAL.userName = res.data.data[0].name;
+                   this.GLOBAL.userEmail = res.data.data[0].email;
                 }else{
                     //alert(res.data.message)
                     this.msg = res.data.message

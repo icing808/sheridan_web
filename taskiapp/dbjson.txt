@@ -1,0 +1,10 @@
+{
+    “email":"zhaolu@sheridancollege.ca"，
+    "name":"zhaolu"，
+    "password":"123456"，
+    "born_date":"2020-01-01"，
+    "role_id":1，
+    "created_on": new Date(),
+    "modified_on":new Date()
+}
+

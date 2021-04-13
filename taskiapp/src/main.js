@@ -14,6 +14,7 @@ import { FontAwesomeIcon } from '../node_modules/@fortawesome/vue-fontawesome'
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import global_ from './components/global/Global'
 
 // Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue)
@@ -27,6 +28,8 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.prototype.$http = axios
 
 Vue.config.productionTip = false
+
+Vue.prototype.GLOBAL = global_
 
 /* eslint-disable no-new */
 new Vue({
