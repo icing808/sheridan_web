@@ -3,8 +3,8 @@
     <img src="../assets/welcome-logo.png" class="logo">
     <div>
       <img src="../assets/welcome-pic.png">
-      <h1 id="hello">Hello!</h1>
-      <p id="intro">Lorem ipsum dolor sit amet, consect adiposing elit, sed do eiusmod temttingcig ut laborer et dolore magna al.</p>
+      <h1 id="hello">Hello!👋</h1>
+      <p id="intro">Taski is a reliable and easy-to-use task manager that can help you optimize your schedule and productivity.</p>
       <div class="welcome-buttons">
         <b-button class="btn log">
           <router-link to="/Login" ><p id="p1">LOGIN</p></router-link>
@@ -32,7 +32,11 @@ export default {
 .welcome-buttons{
 
 }
-
+.logo{
+ position:relative;
+ left:-100px;
+ top:-20px;
+}
 .btn{
     width: 280px;
     height: 40px;
@@ -56,11 +60,12 @@ export default {
     color:black
 }
 #intro{
-    margin-left:16%;
-    margin-right:13%;
+    width:294px;
+    height:60px;
+    margin-left:40.5%;
     text-align:left;
-    color:#6c757d;
-    font-size:14px;
+    color:#6D6B6B;
+    font-size:15px;
     margin-bottom:4%;
 }
 #hello{
