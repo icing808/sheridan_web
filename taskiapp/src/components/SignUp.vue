@@ -21,7 +21,7 @@
         </div>
         <div>
             <b-button @click="register">
-                Sign In
+                Sign Up
             </b-button>
         </div>
         <div>
