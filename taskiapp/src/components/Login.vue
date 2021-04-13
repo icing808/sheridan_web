@@ -26,7 +26,7 @@
         <div>
             <b-button variant="outline-primary" v-show="showSignUp" class="btn snup">
                 <router-link to="/SignUp">
-                    CREATE ACCOUNT
+                    <p id="">CREATE ACCOUNT</p>
                 </router-link>
             </b-button>
         </div>
@@ -88,8 +88,10 @@ h2,h5{
     text-align:left;
     margin-left:16%;
 }
+p{
+    color:black;
+}
 #back{
-    border:1px solid red;
     position:absolute;
     left:10%;
     top:6%;

@@ -7,10 +7,10 @@
       <p id="intro">Lorem ipsum dolor sit amet, consect adiposing elit, sed do eiusmod temttingcig ut laborer et dolore magna al.</p>
       <div class="welcome-buttons">
         <b-button class="btn log">
-          <router-link to="/Login" id="p1">LOGIN</router-link>
+          <router-link to="/Login" ><p id="p1">LOGIN</p></router-link>
       </b-button><br><br>
         <b-button class="btn snup">
-          <router-link to="/SignUp" id="p2">SIGN UP</router-link>
+          <router-link to="/SignUp"><p id="p2">SIGN UP</p></router-link>
         </b-button>
       </div>
     </div>
@@ -32,6 +32,7 @@ export default {
 .welcome-buttons{
 
 }
+
 .btn{
     width: 280px;
     height: 40px;
@@ -48,10 +49,10 @@ export default {
     background-color:white;
     border-radius:8px;
 }
-.p1{
+#p1{
     color:white
 }
-.p2{
+#p2{
     color:black
 }
 #intro{
