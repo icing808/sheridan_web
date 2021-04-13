@@ -69,6 +69,7 @@ export default {
     margin-bottom:4%;
 }
 #hello{
+    font-weight:800;
     margin-top:6%;
 }
 </style>
