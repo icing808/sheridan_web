@@ -2,35 +2,35 @@
     <div class="login">
         <b-button variant="outline-primary">
             <router-link to="/">
-                <img src="../assets/back.png">
+                <img id="back" src="../assets/back.png">
             </router-link>
         </b-button>
-        <h1>Welcome back</h1>
-        <h2>Please log in :)</h2>
+        <h2>Welcome back</h2>
+        <h5>Please log in :)</h5>
 
-        <img src="../assets/login-pic.png">
-        <div>
-            <input type="text" placeholder="Email" v-model="email">
+        <img src="../assets/login-pic.png" id="img" class="cup">
+        <div id="email">
+            <input type="text" placeholder="Email" v-model="email" >
         </div>
-        <div>
+        <div id="psd">
             <input type="text" placeholder="Password" v-model="password">
         </div>
         <div>
-            <b-button @click="login">
-                Sign In
+            <b-button @click="login" class="btn log">
+                LOGIN
             </b-button>
         </div>
         <div>
             <a>Forget Password?</a>
         </div>
         <div>
-            <b-button variant="outline-primary" v-show="showSignUp">
+            <b-button variant="outline-primary" v-show="showSignUp" class="btn snup">
                 <router-link to="/SignUp">
                     CREATE ACCOUNT
-                </router-link> 
+                </router-link>
             </b-button>
         </div>
-        
+
         <!-- CHECK -->
         <div v-show="showID">
             <p>Hello, {{name}}</p>
@@ -84,6 +84,57 @@ export default {
 
 
 <style scoped>
+h2,h5{
+    text-align:left;
+    margin-left:16%;
+}
+#back{
+    border:1px solid red;
+    position:absolute;
+    left:10%;
+    top:6%;
+}
 
+.btn{
+    width: 280px;
+    height: 40px;
+    border:none;
+}
+.log{
+    background:linear-gradient(to right, #04B4EE,#1ED9D3);
+    color:white;
+    margin-top:8%;
+    margin-bottom:4%;
+}
+.snup{
+    border:2px solid transparent;
+    border-image:linear-gradient(to right, #04B4EE,#1ED9D3);
+    border-image-slice:1;
+    background-color:white;
+    border-radius:8px;
+    margin-top:4%;
+}
+.cup{
+    width: 100px
+}
+#email{
+    margin-top: 5%
+}
+#psd{
+    margin-top: 2%;
+    margin-bottom: 6%
+}
+#email input{
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #ccc;
+    width:280px;
+}
+#psd input{
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #ccc;
+    width:280px;
+}
 
 </style>

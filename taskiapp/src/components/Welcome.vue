@@ -7,10 +7,10 @@
       <p id="intro">Lorem ipsum dolor sit amet, consect adiposing elit, sed do eiusmod temttingcig ut laborer et dolore magna al.</p>
       <div class="welcome-buttons">
         <b-button class="btn log">
-          <router-link to="/Login" class="p1">LOGIN</router-link>
+          <router-link to="/Login" id="p1">LOGIN</router-link>
       </b-button><br><br>
         <b-button class="btn snup">
-          <router-link to="/SignUp" class="p2">SIGN UP</router-link>
+          <router-link to="/SignUp" id="p2">SIGN UP</router-link>
         </b-button>
       </div>
     </div>
