@@ -79,14 +79,22 @@ export default {
 }
 </script>
 <style scoped>
+h2{
+    font-size:36px;
+    font-weight:800;
+    
+}
+h5{
+    font-size:24px;
+}
 h2,h5{
     text-align:left;
-    margin-left:16%;
-    font-weight:bold;
+    margin-left:40%;
+    color:#1B052F;
 }
 #back{
     position:absolute;
-    left:10%;
+    left:38%;
     top:6%;
 }
 
@@ -98,8 +106,8 @@ h2,h5{
 .log{
     background:linear-gradient(to right, #04B4EE,#1ED9D3);
     color:white;
-    margin-top:8%;
-    margin-bottom:4%;
+    margin-top:2%;
+    margin-bottom:1%;
 }
 .snup{
     border:2px solid transparent;
@@ -107,22 +115,22 @@ h2,h5{
     border-image-slice:1;
     background-color:white;
     border-radius:8px;
-    margin-top:4%;
+    margin-top:1%;
 }
 .cup{
     width: 100px;
     margin-left:-4%;
-    margin-top:4%
+    margin-top:2%
 }
 .name{
-    margin-top: 5%
+    margin-top: 2%
 }
 .psd{
     margin-top: 2%;
-    margin-bottom: 6%
+    margin-bottom: 2%
 }
 .input{
-    margin:6%
+    margin-top:2%
 }
 .input input{
     border: none;
