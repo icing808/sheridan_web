@@ -2,17 +2,17 @@
   <b-overlay :show="show" rounded="sm" @shown="onShown" @hidden="onHidden">
     <div class="hello">
       <div class="hello-header">
-        <b-button ref="show" :disabled="show" @click="show = true">
+        <b-button id="add" ref="show" :disabled="show" @click="show = true">
           <img src="../assets/tasks-add-task.png">
         </b-button>
-        <h1>Tasks</h1>
+        <h3>Tasks</h3>
       </div>
 
       <div>
-        <img src="../assets/tasks-empty-pic.png">
+        <img class="cup" src="../assets/tasks-empty-pic.png">
       </div>
 
-      <div>
+      <div id="intro">
         <p>Press "+" to create a new task, they'll show up here in chronological order.</p>
       </div>
 
@@ -21,26 +21,26 @@
       <!-- <h1>{{ msg }}</h1>
       <h1>Hi, {{ this.GLOBAL.userName }}</h1> -->
     </div>
-    <template #overlay>
-      <div>
-          <h2>New Task</h2>
-          <b-button ref="cancel" aria-describedby="cancel-label" @click="show = false">Cancel</b-button>
-          <b-button @click="addTask">Done</b-button>
+    <template #overlay >
+      <div id="temp">
+          <h3 class="title t1">New Task</h3>
+          <b-button class="cancel" ref="cancel" aria-describedby="cancel-label" @click="show = false">Cancel</b-button>
+          <b-button class="done" @click="addTask">Done</b-button>
       </div>
       <div>
-          <div>
+          <div class="underline u1" >
               <input type="text" v-model="title" placeholder="Title">
           </div>
-          <div>
-              <div>Description</div>
+          <div class="underline u2">
+              <div class="title t2"><strong>Description</strong></div>
               <input type="text" v-model="content" placeholder="Content">
           </div>
-          <div>
-              <div>Start Date</div>
+          <div class="underline u3">
+              <div class="title t2"><strong>Start Date</strong></div><br>
               <input type="text" v-model="startTime" placeholder="Start Time">
           </div>
-          <div>
-              <div>End Date</div>
+          <div class="underline u3">
+              <div class="title t2"><strong>End Date</strong></div><br>
               <input type="text" v-model="endTime" placeholder="End Time">
           </div>
 
@@ -78,7 +78,7 @@
 <script>
 export default {
   name: 'HelloWorld',
-  data(){       
+  data(){
         return{
             msg: '',
             title: '',
@@ -96,12 +96,12 @@ export default {
         addTask(){
             //alert("userId:"+this.GLOBAL.userId);
                 this.showAll = false
-                if(this.title == "" 
-                    || this.content == "" 
-                    || this.startTime == "" 
-                    || this.endTime == "" 
-                    || this.categoryId == "" 
-                    || this.level == "" 
+                if(this.title == ""
+                    || this.content == ""
+                    || this.startTime == ""
+                    || this.endTime == ""
+                    || this.categoryId == ""
+                    || this.level == ""
                 ){
                     this.msg = "Each field is required"
                     return
@@ -149,19 +149,88 @@ export default {
 .hello-header{
   display: inline-flex;
 }
-
-/* h1, h2 {
-  font-weight: normal;
+h3{
+    font-weight:800;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+.cup{
+    width: 100px;
+    margin-left:-6%;
+    margin-top:18%;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
+#add{
+    position:absolute;
+    left:8%;
+    background-color:white;
+    border:none;
+    outline: none;
 }
-a {
-  color: #42b983;
+#add img{
+    position:absolute;
+    left:0;
+    top:0;
+}
+#intro{
+    width:294px;
+    height:60px;
+    margin-left:12.5%;
+    margin-top:16%;
+    text-align:left;
+    color:#6D6B6B;
+    font-size:15px;
+    margin-bottom:4%;
+}
+/* template{
+    background-color:green;
 } */
+#temp{
+    margin-top:50%;
+    margin-left:-10%;
+    /* border:1px solid red; */
+    width:120%;
+}
+.title{
+    font-size:20px;
+    position:relative;
+    float:left;
+    margin-top:2%;
+}
+.t1{
+    margin-left:10%
+}
+.t2{
+    font-size:16px;
+}
+
+.cancel, .done{
+    background-color:white;
+    border:none;
+    font-size:18px;
+    outline: none;
+}
+.cancel{
+    color:grey;
+    margin-left:10%
+}
+.done{
+    color: #11C7BA;
+}
+.underline{
+    margin-top: 5%
+}
+.u1{
+    margin-top:10%;
+}
+.u2 input{
+    height:60px;
+}
+.u3 input{
+    background-color:#F5F8F7;
+}
+.underline input{
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #ccc;
+    width:290px;
+    height:36px;
+}
 </style>
