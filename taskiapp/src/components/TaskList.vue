@@ -1,9 +1,15 @@
 <template>
     <div>
+        <div class="header">
+        <b-button id="add" ref="show" :disabled="show" @click="show = true">
+          <img src="../assets/tasks-add-task.png">
+        </b-button>
+        <h3>Tasks</h3>
+        </div>
         <div>
             <b-card no-body>
-                <b-tabs pills card>
-                <b-tab title="All" active @click="getAll(-1)">
+                <b-tabs pills card align="center" class="mytabs">
+                <!-- <b-tab title="All" active @click="getAll(-1)">
                     <b-card-text>
                         <input type="hidden" v-model="q_status">
                         <div v-show="showAll">
@@ -47,34 +53,32 @@
                             </p>
                         </div>
                     </b-card-text>
-                </b-tab>
-                <b-tab title="Ongoing" @click="getAll(1)">
+                </b-tab> -->
+                <b-tab  title="Ongoing" @click="getAll(1)" pill1>
                     <b-card-text>
                         <input type="hidden" v-model="q_status">
                         <div v-show="showAll">
                             <p v-for="item in array" :key="item._id">
                                 <ul>
-                                    <li>UserId: {{item.user_id}}</li>
-                                    <li v-if="1 === item.category_id" >Category: Study</li>
+                                    <!-- <li>UserId: {{item.user_id}}</li> -->
+                                    <!-- <li v-if="1 === item.category_id" >Category: Study</li>
                                     <li v-else-if="2 === item.category_id" >Category: Work</li>
                                     <li v-else-if="3 === item.category_id" >Category: Other</li>
-                                    <li v-else>Category: No Category</li>
-
-                                    <li v-if="1 === item.level" >Level: General</li>
-                                    <li v-else-if="2 === item.level" >Level: Important</li>
-                                    <li v-else-if="3 === item.level" >Level: Emergent</li>
-                                    <li v-else>Level: No Level</li>
-
+                                    <li v-else>Category: No Category</li> -->
                                     <li>Title: {{item.title}}</li>
-                                    <li>Content: {{item.content}}</li>
-                                    <li>Start Time: {{item.start_time}}</li>
+                                    <li v-if="1 === item.level" > General</li>
+                                    <li v-else-if="2 === item.level" >Important</li>
+                                    <li v-else-if="3 === item.level" >Emergent</li>
+                                    <li v-else>Low Priority</li>
+                                    <!-- <li>Content: {{item.content}}</li>
+                                    <li>Start Time: {{item.start_time}}</li> -->
                                     <li>End Time: {{item.end_time}}</li>
-                                    <li v-if="0 === item.status" >Status: Pending</li>
+                                    <!-- <li v-if="0 === item.status" >Status: Pending</li>
                                     <li v-else-if="1 === item.status" >Status: On going</li>
                                     <li v-else-if="2 === item.status" >Status: Finish</li>
                                     <li v-else-if="3 === item.status" >Status: Ignore</li>
                                     <li v-else-if="4 === item.status" >Status: Expire</li>
-                                    <li v-else>Status: No Status</li>
+                                    <li v-else>Status: No Status</li> -->
                                     <li v-show="delBtnShow"><button @click="deleteone(item._id)">Delete</button></li>
                                     <li v-show="doneBtnShow"><button @click="updateStatus(item._id)">Done</button></li>
                                 </ul>
@@ -87,30 +91,32 @@
                         <input type="hidden" v-model="q_status">
                         <div v-show="showAll">
                             <p v-for="item in array" :key="item._id">
+                                
                                 <ul>
-                                    <li>UserId: {{item.user_id}}</li>
+                                    <!-- <li>UserId: {{item.user_id}}</li>
                                     <li v-if="1 === item.category_id" >Category: Study</li>
                                     <li v-else-if="2 === item.category_id" >Category: Work</li>
                                     <li v-else-if="3 === item.category_id" >Category: Other</li>
-                                    <li v-else>Category: No Category</li>
-
-                                    <li v-if="1 === item.level" >Level: General</li>
-                                    <li v-else-if="2 === item.level" >Level: Important</li>
-                                    <li v-else-if="3 === item.level" >Level: Emergent</li>
-                                    <li v-else>Level: No Level</li>
-
-                                    <li>Title: {{item.title}}</li>
-                                    <li>Content: {{item.content}}</li>
-                                    <li>Start Time: {{item.start_time}}</li>
-                                    <li>End Time: {{item.end_time}}</li>
-                                    <li v-if="0 === item.status" >Status: Pending</li>
+                                    <li v-else>Category: No Category</li> -->
+                                    <img id="completed" src="../assets/checked.png">
+                                    <li id="title">{{item.title}}</li>
+                                    <li id="priority" v-if="1 === item.level" >General</li>
+                                    <li id="priority" v-else-if="2 === item.level" >Important</li>
+                                    <li id="priority" v-else-if="3 === item.level" > Emergent</li>
+                                    <li id="priority" v-else>Low Priority</li>
+                                    <li id="duetime"><img id="timeicon" src="../assets/tasks-duetime-icon.png">  {{item.end_time}}</li>
+                                   
+                                    <!-- <li>Content: {{item.content}}</li> -->
+                                    <!-- <li>Start Time: {{item.start_time}}</li> -->
+                                    
+                                    <!-- <li v-if="0 === item.status" >Status: Pending</li>
                                     <li v-else-if="1 === item.status" >Status: On going</li>
                                     <li v-else-if="2 === item.status" >Status: Finish</li>
                                     <li v-else-if="3 === item.status" >Status: Ignore</li>
                                     <li v-else-if="4 === item.status" >Status: Expire</li>
-                                    <li v-else>Status: No Status</li>
-                                    <li v-show="delBtnShow"><button @click="deleteone(item._id)">Delete</button></li>
-                                    <li v-show="doneBtnShow"><button @click="updateStatus(item._id)">Done</button></li>
+                                    <li v-else>Status: No Status</li> -->
+                                     <li v-show="delBtnShow"><button @click="deleteone(item._id)">Delete</button></li>
+                                    <!-- <li v-show="doneBtnShow"><button @click="updateStatus(item._id)">Done</button></li> -->
                                 </ul>
                             </p>
                         </div>
@@ -155,14 +161,18 @@
             </p>
         </div>
         <div>{{msg}}</div> -->
-        
-        <p><router-link to="/AddTask2">Add Task</router-link></p>
-        <p><router-link to="/Home">Home</router-link></p>
+        <!-- <Footer> -->
+        <!-- <p><router-link to="/AddTask2">Add Task</router-link></p>
+        <p><router-link to="/Home">Home</router-link></p> -->
     </div>
 </template>
 <script>
+// import Footer from '../components/Footer'
 export default {
     name: "TaskList",
+    // components:{
+    //     Footer
+    // },
     inject: ['reload'],
     data(){       
         return{
@@ -243,18 +253,54 @@ export default {
 }
 </script>
 <style scoped>
+#add{
+    position:absolute;
+    left:38%;
+    top:7%;
+    background-color:white;
+    border:none;
+    outline: none;
+}
+
 h1, h2 {
-  font-weight: normal;
+  font-size:24px;
+  font-weight: 800;
 }
 ul {
   list-style-type: none;
   padding: 0;
 }
 li {
-  display: inline-block;
-  margin: 0 10px;
+  margin: 1% 10px;
+  color:#1B052F;
 }
 a {
   color: #42b983;
 }
+#completed{
+     position:relative;
+     left:-11%;
+}
+#title{
+    font-size:18px;
+    font-weight:800;
+    text-align: left;
+    margin-left: 42%;  
+    margin-top:-1.8%;
+}
+#priority{
+    margin-left: 20%;
+    display: inline-block;
+}
+#duetime{
+    font-size:16px;
+    font-weight:600;
+    text-align: left;
+    margin-left: 42%;
+}
+#timeicon{
+    margin-top:-.5%;
+}
+
+
 </style>
