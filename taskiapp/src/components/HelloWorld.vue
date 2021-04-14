@@ -1,25 +1,32 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <div class="hello-header">
+      <b-button>
+        <img src="../assets/tasks-add-task.png">
+      </b-button>
+      <h1>Tasks</h1>
+    </div>
+
+    <div>
+      <img src="../assets/tasks-empty-pic.png">
+    </div>
+
+    <div>
+      <p>Press "+" to create a new task, they'll show up here in chronological order.</p>
+    </div>
+
+    <!-- TODO: Add statement when have tasks -->
+
+    <!-- <h1>{{ msg }}</h1>
     <h1>Hi, {{ this.GLOBAL.userName }}</h1>
-    <!-- <h2>Essential Links</h2> -->
     <ul>
-      <!-- <li>
-        <router-link to="/Login">Sign In</router-link>
-      </li>
-      <li>
-        <router-link to="/SignUp">Sign Up</router-link>
-      </li>
-      <li>
-        <router-link to="/UserList">Query User</router-link>
-      </li> -->
       <li>
        <router-link to="/TaskList">Task List</router-link>
       </li>
       <li>
         <router-link to="/AddTask2">Add Task</router-link>
       </li>
-    </ul>
+    </ul> -->
   </div>
 </template>
 
@@ -36,7 +43,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
+.hello-header{
+  display: inline-flex;
+}
+
+/* h1, h2 {
   font-weight: normal;
 }
 ul {
@@ -49,5 +60,5 @@ li {
 }
 a {
   color: #42b983;
-}
+} */
 </style>
