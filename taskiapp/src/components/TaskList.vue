@@ -58,31 +58,41 @@
                     <b-card-text>
                         <input type="hidden" v-model="q_status">
                         <div v-show="showAll">
-                            <p v-for="item in array" :key="item._id">
-                                <ul>
+                            <div v-for="item in array" :key="item._id">
+                                
                                     <!-- <li>UserId: {{item.user_id}}</li> -->
                                     <!-- <li v-if="1 === item.category_id" >Category: Study</li>
                                     <li v-else-if="2 === item.category_id" >Category: Work</li>
                                     <li v-else-if="3 === item.category_id" >Category: Other</li>
                                     <li v-else>Category: No Category</li> -->
-                                    <li>Title: {{item.title}}</li>
-                                    <li v-if="1 === item.level" > General</li>
-                                    <li v-else-if="2 === item.level" >Important</li>
-                                    <li v-else-if="3 === item.level" >Emergent</li>
-                                    <li v-else>Low Priority</li>
+                                    <b-form-checkbox
+                                        class="set-status"
+                                        id="checkbox-1"
+                                        v-model="status"
+                                        name="checkbox-1"
+                                        value="completed"
+                                        unchecked-value="not_completed"
+                                        >
+                                    </b-form-checkbox>
+                                    <h3 id="title">Title: {{item.title}}</h3>
+                                    <p id="priority" v-if="1 === item.level" > General</p>
+                                    <p id="priority" v-else-if="2 === item.level" >Important</p>
+                                    <p id="priority" v-else-if="3 === item.level" >Emergent</p>
+                                    <p id="priority" v-else>Low Priority</p>
                                     <!-- <li>Content: {{item.content}}</li>
                                     <li>Start Time: {{item.start_time}}</li> -->
-                                    <li>End Time: {{item.end_time}}</li>
+                                    <p id="duetime"><img id="timeicon" src="../assets/tasks-duetime-icon.png">  {{item.end_time}}</p>
                                     <!-- <li v-if="0 === item.status" >Status: Pending</li>
                                     <li v-else-if="1 === item.status" >Status: On going</li>
                                     <li v-else-if="2 === item.status" >Status: Finish</li>
                                     <li v-else-if="3 === item.status" >Status: Ignore</li>
                                     <li v-else-if="4 === item.status" >Status: Expire</li>
                                     <li v-else>Status: No Status</li> -->
-                                    <li v-show="delBtnShow"><button @click="deleteone(item._id)">Delete</button></li>
-                                    <li v-show="doneBtnShow"><button @click="updateStatus(item._id)">Done</button></li>
-                                </ul>
-                            </p>
+                                    <div class="btns">
+                                        <div v-show="delBtnShow"><button id="btn1" @click="deleteone(item._id)">Delete</button></div>
+                                        <div v-show="doneBtnShow"><button id="btn2" @click="updateStatus(item._id)">Done</button></div>
+                                    </div>
+                            </div>
                         </div>
                     </b-card-text>
                 </b-tab>
@@ -90,21 +100,21 @@
                     <b-card-text>
                         <input type="hidden" v-model="q_status">
                         <div v-show="showAll">
-                            <p v-for="item in array" :key="item._id">
+                            <div v-for="item in array" :key="item._id">
                                 
-                                <ul>
+                                <div>
                                     <!-- <li>UserId: {{item.user_id}}</li>
                                     <li v-if="1 === item.category_id" >Category: Study</li>
                                     <li v-else-if="2 === item.category_id" >Category: Work</li>
                                     <li v-else-if="3 === item.category_id" >Category: Other</li>
                                     <li v-else>Category: No Category</li> -->
                                     <img id="completed" src="../assets/checked.png">
-                                    <li id="title">{{item.title}}</li>
-                                    <li id="priority" v-if="1 === item.level" >General</li>
-                                    <li id="priority" v-else-if="2 === item.level" >Important</li>
-                                    <li id="priority" v-else-if="3 === item.level" > Emergent</li>
-                                    <li id="priority" v-else>Low Priority</li>
-                                    <li id="duetime"><img id="timeicon" src="../assets/tasks-duetime-icon.png">  {{item.end_time}}</li>
+                                    <h3 id="title">{{item.title}}</h3>
+                                    <p id="priority" v-if="1 === item.level" >General</p>
+                                    <p id="priority" v-else-if="2 === item.level" >Important</p>
+                                    <p id="priority" v-else-if="3 === item.level" >Emergent</p>
+                                    <p id="priority" v-else>Low Priority</p>
+                                    <p id="duetime"><img id="timeicon" src="../assets/tasks-duetime-icon.png">  {{item.end_time}}</p>
                                    
                                     <!-- <li>Content: {{item.content}}</li> -->
                                     <!-- <li>Start Time: {{item.start_time}}</li> -->
@@ -115,10 +125,10 @@
                                     <li v-else-if="3 === item.status" >Status: Ignore</li>
                                     <li v-else-if="4 === item.status" >Status: Expire</li>
                                     <li v-else>Status: No Status</li> -->
-                                     <li v-show="delBtnShow"><button @click="deleteone(item._id)">Delete</button></li>
+                                    <div v-show="delBtnShow"><button @click="deleteone(item._id)">Delete</button></div>
                                     <!-- <li v-show="doneBtnShow"><button @click="updateStatus(item._id)">Done</button></li> -->
-                                </ul>
-                            </p>
+                                </div>
+                            </div>
                         </div>
                     </b-card-text>
                 </b-tab>
@@ -161,13 +171,13 @@
             </p>
         </div>
         <div>{{msg}}</div> -->
-        <!-- <Footer> -->
+        <!-- <Footer /> -->
         <!-- <p><router-link to="/AddTask2">Add Task</router-link></p>
         <p><router-link to="/Home">Home</router-link></p> -->
     </div>
 </template>
 <script>
-// import Footer from '../components/Footer'
+// import Footer from './Footer'
 export default {
     name: "TaskList",
     // components:{
@@ -278,8 +288,37 @@ a {
   color: #42b983;
 }
 #completed{
-     position:relative;
-     left:-11%;
+  position:relative;
+  left:-11%;
+}
+.set-status{
+   margin-left:-20%;
+   color:#1FDAD2;
+   /* margin-top:-1%; */
+}
+.btns{
+    /* border:1px solid red; */
+    flex-direction: row;
+    width:400px;
+    margin-left:42%;
+    margin-top: -1%;
+    margin-bottom: 3%;
+}
+#btn1{
+    display: inline-block;
+    border:none;
+    float: left;
+    
+    /* margin-right:2%; */
+    margin-bottom: 2%;
+}
+#btn2{
+    border:none;
+    display: inline-block;
+    margin-bottom: 2%;
+    background-color:#1FDAD2;
+    color:white;
+
 }
 #title{
     font-size:18px;
@@ -291,12 +330,16 @@ a {
 #priority{
     margin-left: 20%;
     display: inline-block;
+    float: right;
+    margin-right: 38%;
+    margin-top:-1.8%;
 }
 #duetime{
     font-size:16px;
     font-weight:600;
     text-align: left;
     margin-left: 42%;
+    margin-bottom:2%;
 }
 #timeicon{
     margin-top:-.5%;
