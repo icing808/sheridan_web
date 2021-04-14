@@ -36,25 +36,37 @@
               <input type="text" v-model="content" placeholder="Content">
           </div>
           <div class="underline u3">
-              <div class="title t2"><strong>Start Date</strong></div><br>
-              <input type="text" v-model="startTime" placeholder="Start Time">
+              <div class="title t2 "><strong>Start Date</strong></div><br>
+              <!-- <input class="form-control" type="text" v-model="startTime" placeholder="Start Time"> -->
+              <b-form-input type="date" v-model="startTime" class="form-control"></b-form-input>
           </div>
           <div class="underline u3">
               <div class="title t2"><strong>End Date</strong></div><br>
-              <input type="text" v-model="endTime" placeholder="End Time">
+              <!-- <input class="form-control" type="text" v-model="endTime" placeholder="End Time"> -->
+              <b-form-input type="date" v-model="endTime" class="form-control"></b-form-input>
           </div>
 
           <div class="barrage-size">
-              Category:
-              <input type="radio" value="1" v-model="categoryId"> <span id="s-size">Study</span>
+              <div class="title t2"><strong>Category:</strong></div><br><br>
+              <div class="radio r1">
+              <!-- <input type="radio" value="1" v-model="categoryId"> <span id="s-size">Study</span>
               <input type="radio" value="2" v-model="categoryId"> <span id="m-size">Work</span>
-              <input type="radio" value="3" v-model="categoryId"> <span id="l-size">Other</span>
+              <input type="radio" value="3" v-model="categoryId"> <span id="l-size">Other</span> -->
+              <b-form-radio class="c1" name="categoryId" size="lg" value="1" v-model="categoryId"><p>Study</p></b-form-radio>
+              <b-form-radio class="c1" name="categoryId" size="lg" value="2" v-model="categoryId"><p>Work</p></b-form-radio>
+              <b-form-radio class="c1" name="categoryId" size="lg" value="3" v-model="categoryId"><p>Other</p></b-form-radio>
+              </div>
           </div>
           <div>
-              Level:
-              <input type="radio" value="1" v-model="level"> <span id="s-size">General</span>
+              <div class="title t2"><strong>Level:</strong></div><br>
+              <div class="radio">
+              <!-- <input type="radio" value="1" v-model="level"> <span id="s-size">General</span>
               <input type="radio" value="2" v-model="level"> <span id="m-size">Important</span>
-              <input type="radio" value="3" v-model="level"> <span id="l-size">Emergent</span>
+              <input type="radio" value="3" v-model="level"> <span id="l-size">Emergent</span> -->
+                <b-form-radio class="c2" name="level" size="lg" value="1" v-model="level"><p>General</p></b-form-radio>
+                <b-form-radio class="c2" name="level" size="lg" value="2" v-model="level"><p>Important</p></b-form-radio>
+                <b-form-radio class="c2" name="level" size="lg" value="3" v-model="level"><p>Emergent</p></b-form-radio>
+              </div>
           </div>
 
       </div>
@@ -152,6 +164,9 @@ export default {
 h3{
     font-weight:800;
 }
+p{
+    font-size:16px;
+}
 .cup{
     width: 100px;
     margin-left:-6%;
@@ -232,5 +247,26 @@ h3{
     border-bottom: 1px solid #ccc;
     width:290px;
     height:36px;
+}
+.u3 input:focus{
+    box-shadow: 0 0 4px 1px #11C7BA;
+}
+.radio{
+    position:relative;
+    display:inline-block;
+    font-size:12px;
+    /* border:1px solid red; */
+    width:110%;
+}
+
+.c1,.c2{
+    /* border:1px solid red; */
+    width:35%;
+    float:left;
+    margin-left:-3%;
+}
+.c1{
+    width:32%;
+    margin-left:-4%;
 }
 </style>
