@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <div class="hello-header">
-      <b-button>
+      <b-button @click="$router.push('AddTask2')">
         <img src="../assets/tasks-add-task.png">
       </b-button>
       <h1>Tasks</h1>
