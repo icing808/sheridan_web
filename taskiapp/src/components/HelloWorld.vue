@@ -52,9 +52,9 @@
               <!-- <input type="radio" value="1" v-model="categoryId"> <span id="s-size">Study</span>
               <input type="radio" value="2" v-model="categoryId"> <span id="m-size">Work</span>
               <input type="radio" value="3" v-model="categoryId"> <span id="l-size">Other</span> -->
-              <b-form-radio class="c1" name="radio-size" size="lg" value="1" v-model="categoryId"><p>Study</p></b-form-radio>
-              <b-form-radio class="c1" name="radio-size" size="lg" value="2" v-model="categoryId"><p>Work</p></b-form-radio>
-              <b-form-radio class="c1" name="radio-size" size="lg" value="3" v-model="categoryId"><p>Other</p></b-form-radio>
+              <b-form-radio class="c1" name="categoryId" size="lg" value="1" v-model="categoryId"><p>Study</p></b-form-radio>
+              <b-form-radio class="c1" name="categoryId" size="lg" value="2" v-model="categoryId"><p>Work</p></b-form-radio>
+              <b-form-radio class="c1" name="categoryId" size="lg" value="3" v-model="categoryId"><p>Other</p></b-form-radio>
               </div>
           </div>
           <div>
@@ -63,9 +63,9 @@
               <!-- <input type="radio" value="1" v-model="level"> <span id="s-size">General</span>
               <input type="radio" value="2" v-model="level"> <span id="m-size">Important</span>
               <input type="radio" value="3" v-model="level"> <span id="l-size">Emergent</span> -->
-                <b-form-radio class="c2" name="radio-size" size="lg" value="1" v-model="level"><p>General</p></b-form-radio>
-                <b-form-radio class="c2" name="radio-size" size="lg" value="2" v-model="level"><p>Important</p></b-form-radio>
-                <b-form-radio class="c2" name="radio-size" size="lg" value="3" v-model="level"><p>Emergent</p></b-form-radio>
+                <b-form-radio class="c2" name="level" size="lg" value="1" v-model="level"><p>General</p></b-form-radio>
+                <b-form-radio class="c2" name="level" size="lg" value="2" v-model="level"><p>Important</p></b-form-radio>
+                <b-form-radio class="c2" name="level" size="lg" value="3" v-model="level"><p>Emergent</p></b-form-radio>
               </div>
           </div>
 
