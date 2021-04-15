@@ -272,4 +272,54 @@ router.get('/api/task/updateTasksStatus',(req,res) => {
     
 });
 
+//get user task report date
+router.post('/api/task/getTaskiData',(req,res) => {
+    console.log("into-getTaskiData--");
+    console.log(req);
+    //status（0:pending； 1:ongoing； 2:finish； 3:ignore； 4:expire ）
+    let count0 = 0.00;
+    let count1 = 0.00;
+    let count2 = 0.00;
+    let count3 = 0.00;
+    let count4 = 0.00;
+    models.Task.find({user_id: req.body.userId },(err,data) => {
+        if (err) {
+            res.send({'status': 1002, 'message': 'Get data failure!', 'data': err});
+        } else {
+            if(data.length > 0){
+                data.forEach(function(item) {
+                    if(0 == item.status){
+                        count0 +=1;
+                    } else if(1 == item.status){
+                        count1 +=1;
+                    } else if(2 == item.status){
+                        count2 +=1;
+                    } else if(3 == item.status){
+                        count3 +=1;
+                    } else if(4 == item.status){
+                        count4 +=1;
+                    }
+                });
+                let total = count0 + count1 + count2 + count3 + count4;
+                if(total > 0){
+                    count0 = parseInt(count0/total*100);
+                    count1 = parseInt(count1/total*100);
+                    count2 = parseInt(count2/total*100);
+                    count3 = parseInt(count3/total*100);
+                    count4 = parseInt(count4/total*100);
+                }
+                var chartData = [{"name": "Pending", "value": count0}, 
+                                 {"name": "On Going", "value": count1},
+                                 {"name": "Completed", "value": count2},  
+                                 {"name": "Ignore", "value": count3},
+                                 {"name": "Expired", "value": count4}];
+                console.log(chartData);
+                res.send({'status': 1000, 'message': 'Get data successful!', 'data': chartData});
+            }
+        }
+    });
+    
+
+});
+
 module.exports = router;
