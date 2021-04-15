@@ -9,14 +9,14 @@
         <!-- Footer -->
         <div class="footer-container">
             <div class="footer">
-                <b-button class="footer-button" @click="$router.push('Home')">
-                <img src="../assets/TaskList-normal.png">
+                <b-button class="footer-button" @click="$router.push('Home').catch(err=>err)">
+                <img src="../assets/calendar-selected.png">
                 </b-button>
-                <b-button class="footer-button" @click="$router.push('TaskList')">
+                <b-button class="footer-button" @click="$router.push('Calendar')">
                 <img src="../assets/calendar-normal.png">
                 </b-button>
-                <b-button class="footer-button" @click="$router.push('Account').catch(err=>err)">
-                <img src="../assets/user-selected.png">
+                <b-button class="footer-button" @click="$router.push('Account')">
+                <img src="../assets/user-normal.png">
                 </b-button>
             </div>
         </div>
@@ -96,7 +96,7 @@
                                     <h3 id="title">Title: {{item.title}}</h3>
                                     <p id="priority" v-if="1 === item.level" > General</p>
                                     <p class="med" id="priority" v-else-if="2 === item.level" >Important</p>
-                                    <p class="emg"id="priority" v-else-if="3 === item.level" >Emergent</p>
+                                    <p class="emg" id="priority" v-else-if="3 === item.level" >Emergent</p>
                                     <p class="low" id="priority" v-else>Low Priority</p>
                                     </div>
                                     <!-- <li>Content: {{item.content}}</li>

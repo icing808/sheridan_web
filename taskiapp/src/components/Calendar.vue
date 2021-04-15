@@ -5,6 +5,78 @@
       hidden: true 
     ></b-calendar>
 
+    <div>
+      <div>Tasks</div>
+      <div>
+            <b-card-text>
+              <input type="hidden" v-model="q_status">
+              <div class="container" v-show="showAll">
+                  <div  v-for="item in array" :key="item._id">
+                    <b-form-checkbox
+                        class="set-status c1"
+                        size="lg"
+                        id="checkbox-1"
+                        v-model="status"
+                        name="checkbox-1"
+                        value="completed"
+                        unchecked-value="not_completed"
+                        >
+                    </b-form-checkbox>
+                    <div class="list">
+
+                    <div class="title-pri">
+                    <h3 id="title">Title: {{item.title}}</h3>
+                    <p id="priority" v-if="1 === item.level" > General</p>
+                    <p class="med" id="priority" v-else-if="2 === item.level" >Important</p>
+                    <p class="emg" id="priority" v-else-if="3 === item.level" >Emergent</p>
+                    <p class="low" id="priority" v-else>Low Priority</p>
+                    </div>
+                    <p id="duetime">
+                      <img id="timeicon" src="../assets/tasks-duetime-icon.png">  
+                      {{item.end_time}}
+                    </p>
+                    </div>
+
+                    <!-- <div class="btns">
+                        <div v-if="0 === item.status">
+                            <button id="btn2" @click="updateTask(item._id)">Edit</button>
+                        </div>
+                        <div v-if="0 === item.status || 1 === item.status">
+                            <button id="btn1" @click="updateStatus(item._id, 3)">Cancel</button>
+                        </div>
+                        <div v-if="1 === item.status">
+                            <button id="btn2" @click="updateStatus(item._id, 2)">Done</button>
+                        </div>
+                        <div v-if="0 === item.status || 3 === item.status || 4 === item.status">
+                            <button id="btn1" @click="deleteone(item._id)">Delete</button>
+                        </div>
+                    </div> -->
+                  </div>
+              </div>
+            </b-card-text>
+      </div>
+
+      <div>Completed</div>
+      <div>
+          <b-card-text>
+            <input type="hidden" v-model="q_status">
+            <div v-show="showAll">
+                <div v-for="item in array" :key="item._id">
+                    <div>
+                        <img id="completed" src="../assets/checked.png">
+                        <h3 id="title">{{item.title}}</h3>
+                        <p id="priority" v-if="1 === item.level" >General</p>
+                        <p id="priority" v-else-if="2 === item.level" >Important</p>
+                        <p id="priority" v-else-if="3 === item.level" >Emergent</p>
+                        <p id="priority" v-else>Low Priority</p>
+                        <p id="duetime"><img id="timeicon" src="../assets/tasks-duetime-icon.png">  {{item.end_time}}</p>
+                    </div>
+                </div>
+            </div>
+          </b-card-text>
+      </div>
+    </div>
+
     <!-- Footer -->
       <div class="footer-container">
         <div class="footer">
@@ -28,8 +100,37 @@ export default {
   name: 'Calender',
   data () {
     return {
-      state: 'normal'
+      state: 'normal',
+      array: [],
+      showAll: false,
+      q_status: ''
     }
+  },
+  methods: {
+    getAll: function(statusId){
+      this.q_status = statusId;
+      let params = {
+          status: statusId,
+          userId: this.GLOBAL.userId
+      }
+      this.$http.post('/api/task/all', params).then((res) => {
+          console.log(res)
+          if(res.data.length>0){
+              this.showAll = true
+              this.array = res.data
+              this.msg = ""
+          }else{
+              this.msg = "No any task！"
+              this.array = []
+          }
+      }).catch((err) => {
+          console.log(err)
+      })
+    }
+  },
+  created(){
+    this.getAll(-1);
+    this.getAll(2);
   }
 }
 </script>
