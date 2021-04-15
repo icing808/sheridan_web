@@ -113,18 +113,18 @@ export default {
 
 .circle{
   border-radius: 50%;
-  width: 100px;
-  height: 100px; 
+  width: 80px;
+  height: 80px; 
   background: #7B2076;
   margin-left: -4%;
   margin-top:160%;
   color:white;
   text-align: center;
-  line-height: 100px;
+  line-height: 80px;
 }
 
 .name{
-  font-size: xx-large;
+  font-size: x-large;
 }
 .text,.listBtn{
   font-size: 20px;

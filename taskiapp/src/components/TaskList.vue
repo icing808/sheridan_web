@@ -478,13 +478,7 @@ a {
 .completed{
 
 }
-.nav-pills .mytabs .nav-link:not(.active) {
-    background-color:none;
-  }
 
-  .nav-pills .mytabs .nav-link {
-    background-color: #1FDAD2;
-  }
 .footer-container{
    width:100%;
    /* border:1px solid red; */
