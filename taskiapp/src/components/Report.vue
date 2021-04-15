@@ -4,7 +4,9 @@
       <b-button @click="$router.go(-1)">Back</b-button>
     </div>
     <h5>Hi, {{ this.GLOBAL.userName }}, Your Taski Report: </h5>
+    <div class="col-md-12">
     <div id="taskReportDiv" style="width: 600px;height: 400px;"></div>
+    </div>
   </div>
 </template>
 
@@ -38,6 +40,8 @@ export default {
         legend: {
           orient: 'vertical',
           x: 'left',
+          y: 'bottom',
+          padding: [20, 20, 20, 50],
           data:this.opinion
         },
         series: [
@@ -55,7 +59,7 @@ export default {
                 show: true,
                 textStyle: {
                   fontSize: '30',
-                  fontWeight: 'blod'
+                  fontWeight: 'bold'
                 }
               }
             },
