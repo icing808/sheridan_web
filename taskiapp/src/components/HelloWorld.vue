@@ -13,10 +13,10 @@
       </div>
 
       <div class="instruction">
-        <p>Press "+" to create a new task, they'll show up here in chronological order.</p>
-        <p>
+        <p>Press "+" to create a new task, they'll show up here.</p>
+        <!-- <p>
           <b-button @click="exitTaski" type="button" class="btn btn-warning btn-sm">Exit</b-button>
-        </p>
+        </p> -->
       </div>
 
 
