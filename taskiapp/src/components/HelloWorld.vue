@@ -14,6 +14,10 @@
 
       <div id="intro">
         <p>Press "+" to create a new task, they'll show up here in chronological order.</p>
+        <p>
+          <b-button @click="exitTaski">Exit</b-button>
+          <router-link to="/TaskList">Taskis</router-link>
+        </p>
       </div>
 
       <!-- TODO: Add statement when have tasks -->
@@ -151,7 +155,26 @@ export default {
         onHidden() {
             // Focus the show button when the overlay is removed
             this.$refs.show.focus()
+        },
+        exitTaski(){
+          this.GLOBAL.userId = '';
+          this.GLOBAL.userName = '';
+          this.GLOBAL.userEmail = '';
+          this.$router.push({
+            path: '/Login',
+            replace: true
+          });
         }
+    },
+    created() {
+          console.log('init Method:'+this.GLOBAL.userId);
+          if(this.GLOBAL.userId == '' ){
+              alert("Please Sign In");
+              this.$router.push({
+                path: '/Login',
+                replace: true
+              });
+          } 
     }
 }
 </script>
