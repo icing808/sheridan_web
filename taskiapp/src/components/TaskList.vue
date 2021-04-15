@@ -201,14 +201,16 @@ export default {
             array: [],
             showAll: false,
             q_status: '',
-            status: 'not_accepted'
+            status: 'not_accepted',
+            intervalId: null
         }
     },
     methods:{
         getAll(statusId){
             this.q_status = statusId;
             let params = {
-                status: statusId
+                status: statusId,
+                userId: this.GLOBAL.userId
             }
             this.$http.post('/api/task/all', params).then((res) => {
                 console.log(res)
@@ -266,6 +268,32 @@ export default {
                        path: '/AddTask2?tId='+tId,
                        replace: true
             });
+        },
+        //Update task status in real time
+        dataRefresh(){
+          //Timer in progress, exit function
+          if (this.intervalId != null){
+            return;
+          }
+          //Timer is empty, execute lifecycle 5 mins
+          this.intervalId = setInterval(() => {
+            console.log("refresh:"+ new Date());
+            this.updateTasksStatus();
+          }, 300000);
+        },
+        updateTasksStatus(){
+          //Database update data
+          this.$http.get("/api/task/updateTasksStatus", {userId: this.GLOBAL.userId}).then((res)=>{
+              this.getAll(this.q_status);
+              console.log(res)
+          }).catch((err)=>{
+              console.log(err)
+          })
+        },
+        //Stop Timer
+        clear(){
+          clearInterval(this.intervalId);
+          this.intervalId = null;
         }
     },
     created() {
@@ -282,7 +310,12 @@ export default {
             this.q_status = -1;
         }
         this.getAll(this.q_status);
-    }
+        this.dataRefresh();
+    },
+  //After the page is destroyed, clear the timer
+  destroyed(){
+    this.clear();
+  }
 }
 </script>
 <style scoped>

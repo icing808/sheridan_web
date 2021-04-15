@@ -118,7 +118,7 @@ router.post('/api/task/updateStatus',(req,res) => {
 router.post('/api/task/all',(req,res) => {
     if(req.body.status == -1){
         console.log("---all--1");
-        models.Task.find((err,data) => {
+        models.Task.find({user_id: req.body.userId}, (err,data) => {
             if (err) {
                 res.send(err);
             } else {
@@ -127,7 +127,7 @@ router.post('/api/task/all',(req,res) => {
             }
         });
     } else {
-        models.Task.find({status: req.body.status},(err,data) => {
+        models.Task.find({status: req.body.status, user_id: req.body.userId},(err,data) => {
             if (err) {
                 res.send(err);
             } else {
@@ -171,15 +171,104 @@ router.post('/api/task/delete',(req,res) => {
 
 //batch update task status
 router.get('/api/task/updateTasksStatus',(req,res) => {
-    models.Task.updateMany({_id: req.body.id},(err,data) => {
+    /*status=0, start_time<=currentTime update to 1
+    status=1, end_time<=currentTime update to 2
+    status=0, end_time<=currentTime update to 4
+    */
+   models.Task.find({status: 0, user_id: req.body.userId},(err,data) => {
         if (err) {
-            res.send({'status': 1002, 'message': 'Delete failure!', 'data': err});
+            res.send(err);
         } else {
-        	res.send({'status': 1000, 'message': 'batch update successful!', 'data': data});
-
+            if(data.length > 0){
+                let ids = [];
+                let ids2 = [];
+                data.forEach(function(item) {
+                    let startTime = Date.parse(new Date(item.start_time));
+                    let endTime = Date.parse(new Date(item.end_time));
+                    let nowTime = new Date().getTime();
+                    // console.log("startTime");
+                    // console.log(startTime);
+                    // console.log("nowTime");
+                    // console.log(nowTime);
+                    if(startTime <= nowTime){
+                        // console.log("item._id");
+                        // console.log(item._id);
+                        ids.push(item._id);
+                    }
+                    if(endTime <= nowTime){
+                        ids2.push(item._id);
+                    }
+                });
+                if(ids.length > 0){
+                    models.Task.updateMany(
+                        {_id: { $in : ids }}, 
+                        {$set:{status: 1 }},(err1,data1) => {
+                    console.log("data1");
+                    console.log(data1);
+                        if (err1) {
+                            res.send({'status': 1002, 'message': 'batch update failure!', 'data': err1});
+                        } else {
+                            console.log("update status to 1 count:" + data1.n);
+                            //res.send({'status': 1000, 'message': 'batch update successful!', 'data': data1});
+                        }
+                
+                    });
+                }
+                if(ids2.length > 0){
+                    models.Task.updateMany(
+                        {_id: { $in : ids2 }}, 
+                        {$set:{status: 4 }},(err1,data1) => {
+                    console.log("data1");
+                    console.log(data1);
+                        if (err1) {
+                            res.send({'status': 1002, 'message': 'batch update failure!', 'data': err1});
+                        } else {
+                            console.log("update status to 4 count:" + data1.n);
+                            //res.send({'status': 1000, 'message': 'batch update successful!', 'data': data1});
+                        }
+                
+                    });
+                }
+                
+            }
+            
         }
-
     });
+
+    models.Task.find({status: 1, user_id: req.body.userId },(err,data) => {
+        if (err) {
+            res.send(err);
+        } else {
+            if(data.length > 0){
+                let ids = [];
+                data.forEach(function(item) {
+                    let endTime = Date.parse(new Date(item.end_time));
+                    let nowTime = new Date().getTime();
+                    if(endTime <= nowTime){
+                        ids.push(item._id);
+                    }
+                });
+                if(ids.length > 0){
+                    models.Task.updateMany(
+                        {_id: { $in : ids }}, 
+                        {$set:{status: 2 }},(err1,data1) => {
+                    console.log("data1");
+                    console.log(data1);
+                        if (err1) {
+                            res.send({'status': 1002, 'message': 'batch update failure!', 'data': err1});
+                        } else {
+                            console.log("update status to 2 count:" + data1.n);
+                            res.send({'status': 1000, 'message': 'batch update successful!', 'data': data1});
+                        }
+                
+                    });
+                }
+                
+            }
+            
+        }
+    });
+    
     
 });
 
