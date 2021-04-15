@@ -23,9 +23,6 @@
 
       <!-- TODO: Add statement when have tasks -->
 
-      <!-- For echarts dom container -->
-      <h5>Hi, {{ this.GLOBAL.userName }}, Your Taski Report: </h5>
-      <div id="taskReportDiv" style="width: 600px;height: 400px;"></div>
       <!-- Footer -->
       <div class="footer">
           <b-button class="footer-button" @click="$router.push('Home').catch(err=>err)">
@@ -89,17 +86,6 @@
           </div>
 
       </div>
-      <!-- <div class="text-center">
-      <b-button
-          ref="cancel"
-          variant="outline-danger"
-          size="sm"
-          aria-describedby="cancel-label"
-          @click="show = false"
-      >
-          Cancel
-      </b-button>
-      </div> -->
     </template>
 
   </b-overlay>
@@ -124,7 +110,7 @@ export default {
             array: [],
             showAll: false,
             show: false,
-            charts: '',
+            // charts: '',
             opinion:['Pending', 'On going', 'Completed', 'Ignore', 'Expired']           
         }
     },
@@ -184,48 +170,6 @@ export default {
             path: '/Login',
             replace: true
           });
-        },
-        drawPie(id, opinionData){
-          this.charts = echarts.init(document.getElementById(id));
-          this.charts.setOption({
-              tooltip: {
-              trigger: 'item',
-            },
-            legend: {
-              orient: 'vertical',
-              x: 'left',
-              data:this.opinion
-            },
-            series: [
-              {
-                name:'Task Count(%)',
-                type:'pie',
-                radius:['50%','70%'],
-                avoidLabelOverlap: false,
-                label: {
-                  normal: {
-                    show: false,
-                    position: 'center'
-                  },
-                  emphasis: {
-                    show: true,
-                    textStyle: {
-                      fontSize: '30',
-                      fontWeight: 'blod'
-                    }
-                  }
-                },
-                labelLine: {
-                  normal: {
-                    show: false
-                  }
-                },
-                data: opinionData
-              }
-            ]
-
-          })
-
         }
     },
     created() {
@@ -237,21 +181,6 @@ export default {
                 replace: true
               });
           }
-    },
-    mounted() {
-      let opinionData = [];
-      //get pie chart data
-      this.$http.post('/api/task/getTaskiData', {userId: this.GLOBAL.userId}).then((res) => {
-        if(res.data.status == 1000){
-          opinionData = res.data.data
-          this.$nextTick(function() {
-            this.drawPie('taskReportDiv', opinionData)
-          })
-        }
-      }).catch((err)=>{
-          console.log(err)
-      });
-      
     }
 }
 </script>
