@@ -95,11 +95,15 @@ export default {
 
 .footer{
   position:fixed;
-  bottom: 0;
+  bottom: 2%;
+  margin-left:8%;
 }
 
 .footer-button{
   display: inline-block;
   justify-content: space-around;
+  margin:0 20px;
+  background-color: white;
+  border:none;
 }
 </style>

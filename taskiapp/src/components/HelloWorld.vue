@@ -27,6 +27,7 @@
       <h5>Hi, {{ this.GLOBAL.userName }}, Your Taski Report: </h5>
       <div id="taskReportDiv" style="width: 600px;height: 400px;"></div>
       <!-- Footer -->
+      
       <div class="footer">
           <b-button class="footer-button" @click="$router.push('Home').catch(err=>err)">
             <img src="../assets/TaskList-selected.png">
@@ -38,6 +39,7 @@
             <img src="../assets/user-normal.png">
           </b-button>
       </div>
+    
 
     </div>
     <template #overlay >
@@ -372,11 +374,15 @@ p{
 
 .footer{
   position:fixed;
-  bottom: 0;
+  bottom: 2%;
+  margin-left:4.5%;
 }
 
 .footer-button{
   display: inline-block;
   justify-content: space-around;
+  margin:0 20px;
+  background-color: white;
+  border:none;
 }
 </style>
