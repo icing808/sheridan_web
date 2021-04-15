@@ -7,7 +7,7 @@
         </b-button>
         <h2>Welcome back</h2>
         <h5>Please log in :)</h5>
-
+        <h6>{{msg}}</h6>
         <img src="../assets/login-pic.png" id="img" class="cup">
         <div id="email">
             <input type="text" placeholder="Email" v-model="email" >
@@ -86,6 +86,15 @@ export default {
             })
         }
     }
+    ,
+    created: function() {
+          if(this.GLOBAL.userId != '' ){
+              this.$router.push({
+                path: '/Home',
+                replace: true
+              });
+          } 
+    }
 }
 </script>
 
@@ -98,6 +107,10 @@ h2{
 }
 h5{
     font-size:24px;
+}
+h6{
+    font-size:16px;
+    color: red;
 }
 h2,h5{
     text-align:left;
