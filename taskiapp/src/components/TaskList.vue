@@ -1,12 +1,13 @@
 <template>
     <div>
         <div class="header">
-        <b-button id="add" ref="show" :disabled="show" @click="show = true">
+        <b-button id="add" ref="show" @click="gotoAddTask">
           <img src="../assets/tasks-add-task.png">
         </b-button>
         <h3>Tasks</h3>
         </div>
         <div>
+            <div>{{msg}}</div>
             <b-card no-body>
                 <b-tabs pills card align="center" class="mytabs">
                 <!-- <b-tab title="All" active @click="getAll(-1)">
@@ -14,7 +15,7 @@
                         <input type="hidden" v-model="q_status">
                         <div v-show="showAll">
                             <p v-for="item in array" :key="item._id">
-                                
+
                                     <b-form-checkbox
                                         id="checkbox-1"
                                         v-model="status"
@@ -24,7 +25,7 @@
                                     >
                                     I accept the terms and use
                                     </b-form-checkbox>
-                                
+
                                 <ul>
                                     <li>UserId: {{item.user_id}}</li>
                                     <li v-if="1 === item.category_id" >Category: Study</li>
@@ -54,12 +55,12 @@
                         </div>
                     </b-card-text>
                 </b-tab> -->
-                <b-tab  title="Ongoing" @click="getAll(1)" pill1>
+                <b-tab  title="Ongoing" @click="getAll(-1)" pill1>
                     <b-card-text>
                         <input type="hidden" v-model="q_status">
                         <div v-show="showAll">
                             <div v-for="item in array" :key="item._id">
-                                
+
                                     <!-- <li>UserId: {{item.user_id}}</li> -->
                                     <!-- <li v-if="1 === item.category_id" >Category: Study</li>
                                     <li v-else-if="2 === item.category_id" >Category: Work</li>
@@ -89,8 +90,18 @@
                                     <li v-else-if="4 === item.status" >Status: Expire</li>
                                     <li v-else>Status: No Status</li> -->
                                     <div class="btns">
-                                        <div v-show="delBtnShow"><button id="btn1" @click="deleteone(item._id)">Delete</button></div>
-                                        <div v-show="doneBtnShow"><button id="btn2" @click="updateStatus(item._id)">Done</button></div>
+                                        <div v-if="0 === item.status">
+                                            <button id="btn2" @click="updateTask(item._id)">Edit</button>
+                                        </div>
+                                        <div v-if="0 === item.status || 1 === item.status">
+                                            <button id="btn1" @click="updateStatus(item._id, 3)">Cancel</button>
+                                        </div>
+                                        <div v-if="1 === item.status">
+                                            <button id="btn2" @click="updateStatus(item._id, 2)">Done</button>
+                                        </div>
+                                        <div v-if="0 === item.status || 3 === item.status || 4 === item.status">
+                                            <button id="btn1" @click="deleteone(item._id)">Delete</button>
+                                        </div>
                                     </div>
                             </div>
                         </div>
@@ -101,7 +112,7 @@
                         <input type="hidden" v-model="q_status">
                         <div v-show="showAll">
                             <div v-for="item in array" :key="item._id">
-                                
+
                                 <div>
                                     <!-- <li>UserId: {{item.user_id}}</li>
                                     <li v-if="1 === item.category_id" >Category: Study</li>
@@ -115,17 +126,17 @@
                                     <p id="priority" v-else-if="3 === item.level" >Emergent</p>
                                     <p id="priority" v-else>Low Priority</p>
                                     <p id="duetime"><img id="timeicon" src="../assets/tasks-duetime-icon.png">  {{item.end_time}}</p>
-                                   
+
                                     <!-- <li>Content: {{item.content}}</li> -->
                                     <!-- <li>Start Time: {{item.start_time}}</li> -->
-                                    
+
                                     <!-- <li v-if="0 === item.status" >Status: Pending</li>
                                     <li v-else-if="1 === item.status" >Status: On going</li>
                                     <li v-else-if="2 === item.status" >Status: Finish</li>
                                     <li v-else-if="3 === item.status" >Status: Ignore</li>
                                     <li v-else-if="4 === item.status" >Status: Expire</li>
                                     <li v-else>Status: No Status</li> -->
-                                    <div v-show="delBtnShow"><button @click="deleteone(item._id)">Delete</button></div>
+                                     <!-- <li><button @click="deleteone(item._id)">Delete</button></li> -->
                                     <!-- <li v-show="doneBtnShow"><button @click="updateStatus(item._id)">Done</button></li> -->
                                 </div>
                             </div>
@@ -184,13 +195,11 @@ export default {
     //     Footer
     // },
     inject: ['reload'],
-    data(){       
+    data(){
         return{
             msg: '',
             array: [],
             showAll: false,
-            delBtnShow: true,
-            doneBtnShow: true,
             q_status: '',
             status: 'not_accepted'
         }
@@ -207,16 +216,6 @@ export default {
                     this.showAll = true
                     this.array = res.data
                     this.msg = ""
-                    if(statusId == 2){
-                        this.delBtnShow = false
-                        this.doneBtnShow = false
-                    } else if (statusId == 1){
-                        this.delBtnShow = false
-                        this.doneBtnShow = true
-                    } else {
-                        this.delBtnShow = true
-                        this.doneBtnShow = true
-                    }
                 }else{
                     this.msg = "No any task！"
                     this.array = []
@@ -224,7 +223,7 @@ export default {
             }).catch((err) => {
                 console.log(err)
             })
-            
+
         },
         deleteone(ids){
             let params = {
@@ -237,23 +236,47 @@ export default {
                 console.log(err)
             })
         },
-        updateStatus(ids){
+        updateStatus(ids, uStatus){
             let params = {
                 id: ids,
-                status: 2,
+                status: uStatus,
                 q_status: this.q_status
             }
             this.$http.post('/api/task/updateStatus',params).then((res) => {
                 console.log(res)
                 console.log(res.data)
-                //alert(res.data.data)
-                this.array = res.data
+                if(res.data.status != null && 1000 != res.data.status){
+                    this.msg = res.data.message
+                    alert(this.msg)
+                }else{
+                    this.array = res.data
+                }
             }).catch((err) => {
                 console.log(err)
             })
+        },
+        gotoAddTask(){
+            this.$router.push({
+                path: '/AddTask2',
+                replace: true
+            });
+        },
+        updateTask(tId){
+            this.$router.push({
+                       path: '/AddTask2?tId='+tId,
+                       replace: true
+            });
         }
     },
     created() {
+        console.log('init Method:'+this.GLOBAL.userId);
+          if(this.GLOBAL.userId == '' ){
+              alert("Please Sign In");
+              this.$router.push({
+                path: '/Login',
+                replace: true
+              });
+          }
         //alert(this.q_status);
         if(this.q_status == ""){
             this.q_status = -1;
@@ -308,7 +331,7 @@ a {
     display: inline-block;
     border:none;
     float: left;
-    
+
     /* margin-right:2%; */
     margin-bottom: 2%;
 }
@@ -324,7 +347,7 @@ a {
     font-size:18px;
     font-weight:800;
     text-align: left;
-    margin-left: 42%;  
+    margin-left: 42%;
     margin-top:-1.8%;
 }
 #priority{
