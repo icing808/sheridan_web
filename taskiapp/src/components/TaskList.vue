@@ -55,11 +55,11 @@
                         </div>
                     </b-card-text>
                 </b-tab> -->
-                <b-tab  title="Ongoing" @click="getAll(-1)" pill1>
+                <b-tab title="Ongoing" @click="getAll(-1)" pill1>
                     <b-card-text>
                         <input type="hidden" v-model="q_status">
-                        <div v-show="showAll">
-                            <div v-for="item in array" :key="item._id">
+                        <div class="container" v-show="showAll">
+                            <div  v-for="item in array" :key="item._id">
 
                                     <!-- <li>UserId: {{item.user_id}}</li> -->
                                     <!-- <li v-if="1 === item.category_id" >Category: Study</li>
@@ -67,7 +67,8 @@
                                     <li v-else-if="3 === item.category_id" >Category: Other</li>
                                     <li v-else>Category: No Category</li> -->
                                     <b-form-checkbox
-                                        class="set-status"
+                                        class="set-status c1"
+                                        size="lg"
                                         id="checkbox-1"
                                         v-model="status"
                                         name="checkbox-1"
@@ -75,11 +76,15 @@
                                         unchecked-value="not_completed"
                                         >
                                     </b-form-checkbox>
+                                    <div class="list">
+
+                                    <div class="title-pri">
                                     <h3 id="title">Title: {{item.title}}</h3>
                                     <p id="priority" v-if="1 === item.level" > General</p>
-                                    <p id="priority" v-else-if="2 === item.level" >Important</p>
-                                    <p id="priority" v-else-if="3 === item.level" >Emergent</p>
-                                    <p id="priority" v-else>Low Priority</p>
+                                    <p class="med" id="priority" v-else-if="2 === item.level" >Important</p>
+                                    <p class="emg"id="priority" v-else-if="3 === item.level" >Emergent</p>
+                                    <p class="low" id="priority" v-else>Low Priority</p>
+                                    </div>
                                     <!-- <li>Content: {{item.content}}</li>
                                     <li>Start Time: {{item.start_time}}</li> -->
                                     <p id="duetime"><img id="timeicon" src="../assets/tasks-duetime-icon.png">  {{item.end_time}}</p>
@@ -89,6 +94,8 @@
                                     <li v-else-if="3 === item.status" >Status: Ignore</li>
                                     <li v-else-if="4 === item.status" >Status: Expire</li>
                                     <li v-else>Status: No Status</li> -->
+                                    </div>
+
                                     <div class="btns">
                                         <div v-if="0 === item.status">
                                             <button id="btn2" @click="updateTask(item._id)">Edit</button>
@@ -107,7 +114,7 @@
                         </div>
                     </b-card-text>
                 </b-tab>
-                <b-tab title="Completed" @click="getAll(2)">
+                <b-tab class="completed" title="Completed" @click="getAll(2)">
                     <b-card-text>
                         <input type="hidden" v-model="q_status">
                         <div v-show="showAll">
@@ -319,10 +326,16 @@ export default {
 }
 </script>
 <style scoped>
+.hello-header{
+  display: inline-flex;
+}
+.bor{
+    border:1px solid red;
+}
 #add{
     position:absolute;
-    left:38%;
-    top:7%;
+    left:8%;
+    top:5%;
     background-color:white;
     border:none;
     outline: none;
@@ -343,6 +356,48 @@ li {
 a {
   color: #42b983;
 }
+
+.container{
+    /* border:1px solid black; */
+    height:80px;
+    width:100%;
+
+}
+.c1{
+    position:relative;
+    /* border:1px solid green; */
+    display:inline-block;
+    float:left;
+    left:40px;
+    top:20px;
+
+}
+/* .c1 :focus{
+    box-shadow: 0 0 4px 1px #11C7BA;
+} */
+.list{
+    position:relative;
+    display:inline-block;
+    width:300px;
+    float:right;
+    margin-right:-16px;
+    padding:10px;
+    box-shadow: 3px 3px 1px #F8F8F8;
+
+}
+
+.title-pri{
+    /* border:1px solid pink; */
+}
+.low{
+    color:#76EDE0;
+}
+.emg{
+    color:#F79846;
+}
+.med{
+    color:#B972B6;
+}
 #completed{
   position:relative;
   left:-11%;
@@ -352,6 +407,7 @@ a {
    color:#1FDAD2;
    /* margin-top:-1%; */
 }
+
 .btns{
     /* border:1px solid red; */
     flex-direction: row;
@@ -380,26 +436,32 @@ a {
     font-size:18px;
     font-weight:800;
     text-align: left;
-    margin-left: 42%;
+    /* margin-left: 42%; */
     margin-top:-1.8%;
 }
 #priority{
     margin-left: 20%;
     display: inline-block;
     float: right;
-    margin-right: 38%;
-    margin-top:-1.8%;
+    /* margin-right: 38%; */
+    margin-top:-10%;
 }
 #duetime{
     font-size:16px;
     font-weight:600;
     text-align: left;
-    margin-left: 42%;
+
     margin-bottom:2%;
 }
 #timeicon{
     margin-top:-.5%;
 }
+.ongoing{
+   background-color:white;
+   border:1px solid yellow;
+}
+.completed{
 
+}
 
 </style>
