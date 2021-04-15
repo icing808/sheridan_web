@@ -8,6 +8,9 @@ import SignUp from '@/components/SignUp'
 import UserList from '@/components/UserList'
 import TaskList from '@/components/TaskList'
 import AddTask2 from '@/components/AddTask2'
+// import NavBar from '@/components/NavBar'
+import Calendar from '@/components/Calendar'
+import Account from '@/components/Account'
 
 Vue.use(Router)
 
@@ -45,6 +48,14 @@ export default new Router({
       path: "/AddTask2",
       name: "AddTask2",
       component: AddTask2
+    },{
+      path: "/Calendar",
+      name: "Calendar",
+      component: Calendar
+    },{
+      path: "/Account",
+      name: "Account",
+      component: Account
     }
   ]
 })
