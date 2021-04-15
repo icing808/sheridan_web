@@ -7,7 +7,7 @@ import AddTask from '@/components/AddTask'
 import SignUp from '@/components/SignUp'
 import UserList from '@/components/UserList'
 import TaskList from '@/components/TaskList'
-import AddTask2 from '@/components/AddTask2'
+// import AddTask2 from '@/components/AddTask2'
 // import NavBar from '@/components/NavBar'
 import Calendar from '@/components/Calendar'
 import Account from '@/components/Account'
@@ -45,10 +45,6 @@ export default new Router({
       path: "/TaskList",
       name: "TaskList",
       component: TaskList
-    },{
-      path: "/AddTask2",
-      name: "AddTask2",
-      component: AddTask2
     },{
       path: "/Calendar",
       name: "Calendar",
