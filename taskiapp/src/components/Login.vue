@@ -7,8 +7,8 @@
         </b-button>
         <h2>Welcome back</h2>
         <h5>Please log in :)</h5>
-        <h6>{{msg}}</h6>
         <img src="../assets/login-pic.png" id="img" class="cup">
+        <h6>{{msg}}</h6>
         <div id="email">
             <input type="email" placeholder="Email" v-model="email" >
         </div>
@@ -63,6 +63,18 @@ export default {
                 email: this.email,
                 password: this.password
             }
+            const regEmail = /^([a-zA-Z0-9]+[-_\.]?)+@[a-zA-Z0-9]+\.[a-z]+$/;
+            if (this.email == '' || this.email == undefined || this.email == null
+                || this.password == '' || this.password == undefined || this.password == null ) {
+                this.msg = "The input box cannot be empty ";
+                return;
+            } else {
+                if (!regEmail.test(this.email)) {
+                    this.msg = "Please input the correct format in the input box ";
+                    return;
+                }
+            }
+
             this.$http.post('/api/user/login',params).then((res)=>{
                 console.log(res)
                 if(res.data.status == 1000){
@@ -93,7 +105,7 @@ export default {
                 path: '/Home',
                 replace: true
               });
-          } 
+          }
     }
 }
 </script>
@@ -103,7 +115,7 @@ export default {
 h2{
     font-size:36px;
     font-weight:800;
-    
+
 }
 h5{
     font-size:24px;
@@ -136,7 +148,7 @@ p{
     color:white;
     margin-top:8%;
     margin-bottom:6%;
-    
+
 }
 .snup{
     border:2px solid transparent;
