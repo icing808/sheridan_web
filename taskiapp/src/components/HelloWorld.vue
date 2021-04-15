@@ -24,17 +24,18 @@
       <!-- TODO: Add statement when have tasks -->
 
       <!-- Footer -->
-      
-      <div class="footer">
-          <b-button class="footer-button" @click="$router.push('Home').catch(err=>err)">
-            <img src="../assets/TaskList-selected.png">
-          </b-button>
-          <b-button class="footer-button" @click="$router.push('TaskList')">
-            <img src="../assets/calendar-normal.png">
-          </b-button>
-          <b-button class="footer-button" @click="$router.push('Account')">
-            <img src="../assets/user-normal.png">
-          </b-button>
+      <div class="footer-container">
+        <div class="footer">
+            <b-button class="footer-button" @click="$router.push('Home').catch(err=>err)">
+              <img src="../assets/TaskList-selected.png">
+            </b-button>
+            <b-button class="footer-button" @click="$router.push('TaskList')">
+              <img src="../assets/calendar-normal.png">
+            </b-button>
+            <b-button class="footer-button" @click="$router.push('Account')">
+              <img src="../assets/user-normal.png">
+            </b-button>
+        </div>
       </div>
     
 
@@ -301,10 +302,17 @@ p{
     margin-left:-4%;
 }
 
+.footer-container{
+   width:100%;
+   /* border:1px solid red; */
+   display: flex;
+   align-items: center; 
+   justify-content: center;  
+
+}
 .footer{
   position:fixed;
   bottom: 2%;
-  margin-left:8%;
 }
 
 .footer-button{

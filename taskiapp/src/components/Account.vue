@@ -43,16 +43,18 @@
       </template>
 
       <!-- Footer -->
-      <div class="footer">
-          <b-button class="footer-button" @click="$router.push('Home')">
-            <img src="../assets/TaskList-normal.png">
-          </b-button>
-          <b-button class="footer-button" @click="$router.push('TaskList')">
-            <img src="../assets/calendar-normal.png">
-          </b-button>
-          <b-button class="footer-button" @click="$router.push('Account').catch(err=>err)">
-            <img src="../assets/user-selected.png">
-          </b-button>
+      <div class="footer-container">
+        <div class="footer">
+            <b-button class="footer-button" @click="$router.push('Home')">
+              <img src="../assets/TaskList-normal.png">
+            </b-button>
+            <b-button class="footer-button" @click="$router.push('TaskList')">
+              <img src="../assets/calendar-normal.png">
+            </b-button>
+            <b-button class="footer-button" @click="$router.push('Account').catch(err=>err)">
+              <img src="../assets/user-selected.png">
+            </b-button>
+        </div>
       </div>
 
     </b-overlay>
@@ -135,7 +137,7 @@ export default {
   margin-top: 20%;
 }
 .check1{
-  margin-left: 18%;
+  margin-left: 19%;
 }
 .check2{
   margin-left: 58%;
@@ -147,11 +149,18 @@ export default {
   margin-left: 41%;
 }
 
+.footer-container{
+   width:100%;
+   /* border:1px solid red; */
+   display: flex;
+   align-items: center; 
+   justify-content: center;  
 
+}
 .footer{
   position:fixed;
   bottom: 2%;
-  margin-left:8%;
+  /* margin-left:8%; */
 }
 
 .footer-button{
