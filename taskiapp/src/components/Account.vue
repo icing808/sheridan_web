@@ -1,5 +1,6 @@
 <template>
   <div>
+    
     <b-overlay
       show
       :opacity="0.3"
@@ -9,16 +10,16 @@
       <template #overlay>
 
         <div class="circle">
-          <div class="name">Ta</div>
+          <div class="name" ref="userNameDiv">Ta</div>
         </div>
 
         <div class="account">
-          <div><p class="text">Taski365@gmail.com</p></div>
+          <div><p class="text" ref="userEmailDiv">example@abc.com</p></div>
           <b-button class="edit" variant="light">
             <img src="../assets/user-edit-profile.png">
           </b-button>
         </div>
-
+  
         <div>
           <b-list-group class="list">
             <b-list-group-item class="listBtn" button @click="$router.push('Report')">View Task Statistics<img class="check1" src="../assets/user-center-check.png"></b-list-group-item>
@@ -71,6 +72,12 @@ export default {
     }
   },
   methods: {
+    initUser(){
+      let userNameDiv = this.$refs.userNameDiv;
+      let userEmailDiv = this.$refs.userEmailDiv;
+      userNameDiv.innerHTML = this.GLOBAL.userName;
+      userEmailDiv.innerHTML = this.GLOBAL.userEmail;
+    },
     exitTaski(){
           this.GLOBAL.userId = '';
           this.GLOBAL.userName = '';
@@ -81,6 +88,20 @@ export default {
           });
         }
   },
+    created() {
+          if(this.GLOBAL.userId == '' ){
+              alert("Please Sign In");
+              this.$router.push({
+                path: '/Login',
+                replace: true
+              });
+          }
+    },
+    mounted: function () {
+      this.$nextTick(() => {
+        this.initUser();
+      })
+    }
 }
 </script>
 
