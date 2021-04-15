@@ -10,12 +10,15 @@
         </b-card>
         <template #overlay>
             <div>
-                <h2>New Task</h2>
-                <b-button ref="cancel" aria-describedby="cancel-label" @click="show = false">Cancel</b-button>
+                <h2 v-if="tId == null">New Task</h2>
+                <h2 v-else>Edit Task</h2>
+                <b-button ref="cancel" aria-describedby="cancel-label" @click="backToTaskList">Cancel</b-button>
                 <b-button @click="addTask">Done</b-button>
             </div>
             <div>
+                <div>{{msg}}</div>
                 <div>
+                    <input type="hidden" v-model="id">
                     <input type="text" v-model="title" placeholder="Title">
                 </div>
                 <div>
@@ -67,6 +70,7 @@ export default {
     data(){       
         return{
             msg: '',
+            id: '',
             title: '',
             content: '',
             startTime: '',
@@ -77,6 +81,11 @@ export default {
             showAll: false,
             show: false
         }
+    },
+    computed: {
+      tId() {
+        return this.$route.query.tId;
+      }
     },
     methods:{
         addTask(){
@@ -93,6 +102,7 @@ export default {
                     return
                 }
                 let params = {
+                    id: this.id == '' ? null : this.id,
                     title: this.title,
                     content: this.content,
                     startTime: this.startTime,
@@ -101,7 +111,11 @@ export default {
                     level: this.level,
                     userId: this.GLOBAL.userId
                 }
-                this.$http.post('/api/task/addTask',params).then((res)=>{
+                let url = '/api/task/addTask'
+                if(this.id != null && this.id != 0){
+                    url = '/api/task/updateTask'
+                }
+                this.$http.post(url,params).then((res)=>{
                     console.log(res)
                     if(res.data.status == 1000){
                         alert(res.data.message)
@@ -125,7 +139,43 @@ export default {
         onHidden() {
             // Focus the show button when the overlay is removed
             this.$refs.show.focus()
+        },
+        backToTaskList() {
+            this.$router.push({
+                path: '/TaskList',
+                replace: true
+            });
         }
+    },
+  created() {
+          console.log('init Method:'+this.GLOBAL.userId);
+          if(this.GLOBAL.userId == '' ){
+              alert("Please Sign In");
+              this.$router.push({
+                path: '/Login',
+                replace: true
+              });
+          }
+          let vtId = this.$route.query.tId;
+          if(vtId != ''){
+              this.$http.post('/api/task/getTask',{id: vtId}).then((res)=>{
+                console.log(res)
+                console.log(res.data)
+                if(res.data._id != ''){
+                    this.title = res.data.title
+                    this.content = res.data.content
+                    this.startTime = res.data.start_time
+                    this.endTime = res.data.end_time
+                    this.categoryId = res.data.category_id
+                    this.level = res.data.level
+                    this.id = res.data._id
+                    
+                }
+            }).catch((err)=>{
+                console.log(err)
+            })
+          }
+          
     }
 }
 </script>
