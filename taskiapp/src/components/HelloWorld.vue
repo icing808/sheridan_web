@@ -28,7 +28,7 @@
             <b-button class="footer-button" @click="$router.push('Home').catch(err=>err)">
               <img src="../assets/TaskList-selected.png">
             </b-button>
-            <b-button class="footer-button" @click="$router.push('TaskList')">
+            <b-button class="footer-button" @click="$router.push('Calendar')">
               <img src="../assets/calendar-normal.png">
             </b-button>
             <b-button class="footer-button" @click="$router.push('Account')">
