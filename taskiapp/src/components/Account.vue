@@ -21,7 +21,7 @@
 
         <div>
           <b-button-group vertical>
-            <b-button>View Task Statistics</b-button>
+            <b-button @click="$router.push('Report')">View Task Statistics</b-button>
             <b-button>General</b-button>
             <b-button>Theme</b-button>
             <b-button>Notifications</b-button>

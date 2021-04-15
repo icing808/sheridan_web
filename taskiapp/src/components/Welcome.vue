@@ -62,11 +62,11 @@ export default {
 #intro{
     width:294px;
     height:60px;
-    margin-left:40.5%;
+    margin-left:14%;
     text-align:left;
     color:#6D6B6B;
     font-size:15px;
-    margin-bottom:4%;
+    margin-bottom:8%;
 }
 #hello{
     font-weight:800;

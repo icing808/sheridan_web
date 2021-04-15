@@ -89,12 +89,12 @@ h5{
 }
 h2,h5{
     text-align:left;
-    margin-left:40%;
+    margin-left:14%;
     color:#1B052F;
 }
 #back{
     position:absolute;
-    left:38%;
+    left:12%;
     top:6%;
 }
 
@@ -106,8 +106,8 @@ h2,h5{
 .log{
     background:linear-gradient(to right, #04B4EE,#1ED9D3);
     color:white;
-    margin-top:2%;
-    margin-bottom:1%;
+    margin-top:8%;
+    margin-bottom:2%;
 }
 .snup{
     border:2px solid transparent;
@@ -115,12 +115,12 @@ h2,h5{
     border-image-slice:1;
     background-color:white;
     border-radius:8px;
-    margin-top:1%;
+    margin-top:4%;
 }
 .cup{
     width: 100px;
     margin-left:-4%;
-    margin-top:2%
+    margin-top:4%
 }
 .name{
     margin-top: 2%
@@ -130,7 +130,7 @@ h2,h5{
     margin-bottom: 2%
 }
 .input{
-    margin-top:2%
+    margin-top:8%
 }
 .input input{
     border: none;
