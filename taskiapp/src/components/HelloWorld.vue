@@ -304,7 +304,7 @@ p{
 .footer{
   position:fixed;
   bottom: 2%;
-  margin-left:4.5%;
+  margin-left:8%;
 }
 
 .footer-button{
