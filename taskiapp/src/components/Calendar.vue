@@ -9,10 +9,10 @@
       <div class="footer-container">
         <div class="footer">
             <b-button class="footer-button" @click="$router.push('Home').catch(err=>err)">
-              <img src="../assets/TaskList-selected.png">
+              <img src="../assets/TaskList-normal.png">
             </b-button>
             <b-button class="footer-button" @click="$router.push('Calendar')">
-              <img src="../assets/calendar-normal.png">
+              <img src="../assets/calendar-selected.png">
             </b-button>
             <b-button class="footer-button" @click="$router.push('Account')">
               <img src="../assets/user-normal.png">
@@ -35,6 +35,14 @@ export default {
 </script>
 
 <style scoped>
+.footer-container{
+   width:100%;
+   /* border:1px solid red; */
+   display: flex;
+   align-items: center; 
+   justify-content: center;  
+}
+
 .footer{
   position:fixed;
   bottom: 2%;

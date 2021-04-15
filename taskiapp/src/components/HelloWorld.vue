@@ -313,8 +313,8 @@ p{
    display: flex;
    align-items: center; 
    justify-content: center;  
-
 }
+
 .footer{
   position:fixed;
   bottom: 2%;
