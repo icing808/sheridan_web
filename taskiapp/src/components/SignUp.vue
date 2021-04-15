@@ -7,16 +7,17 @@
         <h5>Create a New Account :D</h5>
         <div>
             <img class="cup" src="../assets/sign-up.png">
+            <h6>{{msg}}</h6>
         </div>
         <div>
             <div class="input name">
                 <input type="text" placeholder="Name" v-model="name">
             </div>
             <div class="input">
-                <input type="text" placeholder="Email" v-model="email">
+                <input type="email" placeholder="Email" v-model="email">
             </div>
             <div class="input psd">
-                <input type="text" placeholder="Password" v-model="password">
+                <input type="password" placeholder="Password" v-model="password">
             </div>
         </div>
         <div>
@@ -58,6 +59,25 @@ export default {
                 email: this.email,
                 password: this.password
             }
+
+            const regEmail = /^([a-zA-Z0-9]+[-_\.]?)+@[a-zA-Z0-9]+\.[a-z]+$/;
+            const regPw = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/;
+            if (this.name == '' || this.name == undefined || this.name == null
+                || this.email == '' || this.email == undefined || this.email == null
+                || this.password == '' || this.password == undefined || this.password == null ) {
+                this.msg = "The input box cannot be empty ";
+                return;
+            } else {
+                if (!regEmail.test(this.email)) {
+                    this.msg = "Please input the correct format in the input box ";
+                    return;
+                }
+                if (!regPw.test(this.password)) {
+                    this.msg = "The password must includes Numbers and Letters, and should contain both Numbers and Letters, and the length should be between 8-16 bits ";
+                    return;
+                }
+            }
+
             this.$http.post('/api/user/register',params).then((res)=>{
                 console.log(res)
                 if(res.data.status == 1000){
@@ -82,10 +102,14 @@ export default {
 h2{
     font-size:36px;
     font-weight:800;
-    
+
 }
 h5{
     font-size:24px;
+}
+h6{
+    font-size:16px;
+    color: red;
 }
 h2,h5{
     text-align:left;
