@@ -6,7 +6,7 @@ const router = express.Router();
 router.post('/api/task/addTask',(req,res) => {
 	//there req.body In fact, the body parser middleware is used to parse the data sent by the front end
 	//Query status（0:pending； 1:ongoing； 2:finish； 3:ignore； 4:expire ）
-	models.Task.find({start_time: req.body.startTime, end_time: req.body.endTime, status: { $ne : 3 }},(err,data) => {
+	models.Task.find({start_time: req.body.startTime, end_time: req.body.endTime, status: { $ne : 3 || 4}},(err,data) => {
 		if(err){
 			res.send({'status': 1002, 'message': 'Failure to query database!', 'data': err});
 		}else{
@@ -15,7 +15,7 @@ router.post('/api/task/addTask',(req,res) => {
 			if(data.length > 0){
 				res.send({'status': 1001, 'message': 'The task is already exists'});
 			}else{
-				let newTask = new models.Task({
+                let newTask = new models.Task({
                     user_id: req.body.userId,
                     title : req.body.title,
                     content : req.body.content,
@@ -35,40 +35,34 @@ router.post('/api/task/addTask',(req,res) => {
                 });
 			}
 		}
-	}).sort({_id: -1})
+	}).sort({created_on: -1})
 })
 //update task
 router.post('/api/task/updateTask',(req,res) => {
-    models.Task.find({ status: 0},(err,data) => {
+    models.Task.findById(req.body.id, { status: 0},(err,data) => {
 		if(err){
 			res.send({'status': 1002, 'message': 'Failure to query database!', 'data': err});
 		}else{
-            console.log('Query success')
-            if(data.length > 0){
-                let updateTask = new models.Task({
+            console.log('updateTask Query success')
+            console.log(data)
+            if(data != null){
+                models.Task.findByIdAndUpdate(req.body.id, {
                     title : req.body.title,
                     content : req.body.content,
                     start_time : req.body.startTime,
                     end_time : req.body.endTime,
                     category_id : req.body.categoryId,
                     level: req.body.level
-                });
-                updateTask.update((err,data) => {
-                    if (err) {
-                        // res.send(err);
-                        res.send({'status': 1002, 'message': 'Failed to update database!', 'data': err});
+                }, (err2,data2) => {
+                    if (err2) {
+                        res.send({'status': 1002, 'message': 'Save failure!', 'data': err2});
+                
                     } else {
-                        console.log(data);
-                        res.send({'status': 1000, 'message': 'Update Task successful!', 'data': data});
-                        // if (data.length > 0) {
-                        //     res.send({'status': 1000, 'message': 'Sign In successful!', 'data': data});
-                        // } else {
-                        //     res.send({'status': 1001, 'message': 'Sign In failure. The user is not registered!', 'data': err});
-                        // }
+                        res.send({'status': 1000, 'message': 'Save successful!', 'data': data2});
                     }
-                })
+                });
             } else {
-                res.send({'status': 1001, 'message': 'Cannot modify the task', 'data': err});
+                res.send({'status': 1001, 'message': 'Cannot modify the task', 'data': err2});
             }
         }
     })
@@ -76,34 +70,44 @@ router.post('/api/task/updateTask',(req,res) => {
 
 //update task status
 router.post('/api/task/updateStatus',(req,res) => {
-    //status: 1 -- on going
-    models.Task.find({ _id: req.body.id, status: 0},(err,data) => {
+    models.Task.find({ _id: req.body.id},(err,data) => {
 		if(err){
 			res.send({'status': 1002, 'message': 'Failure to query database!', 'data': err});
 		}else{
             console.log('updateStatus Query success data.length'+ data.length);
             if(data.length > 0){
-                models.Task.findByIdAndUpdate(req.body.id, {status: req.body.status}, (err,data) => {
-                    console.log('updateStatus updated')
-                    // if (err) {
-                    //     // res.send(err);
-                    //     res.send({'status': 1002, 'message': 'Failed to update database!', 'data': err});
-                    // } else {
-                    //     console.log(data);
-                    //     res.send({'status': 1000, 'message': 'Update Task successful!', 'data': data});
-                    // }
-                    models.Task.find({status: req.body.q_status},(err1,data1) => {
-                        console.log('updateStatus find', data1.length)
-                        if (err1) {
-                            res.send(err1);
+                console.log("--find--");
+                console.log(data)
+                //status are ongoing and pending can be modified
+                console.log(data[0].status)
+                if(data[0].status == 0 
+                    || (data[0].status == 1 && (req.body.status == 2 || req.body.status == 3)) ){
+                    models.Task.findByIdAndUpdate(req.body.id, {status: req.body.status}, (err2,data2) => {
+                        console.log('updateStatus updated')
+                        if (err2) {
+                            res.send(err2);
                         } else {
-                            res.send(data1);
+                            let qStatus = req.body.q_status
+                            if(qStatus == -1){
+                                qStatus = { $in:[0, 1, 2, 3, 4]}
+                            }
+                            models.Task.find({status: qStatus},(err3,data3) => {
+                                console.log('updateStatus find', data3.length)
+                                if (err3) {
+                                    res.send(err3);
+                                } else {
+                                    res.send(data3);
+                                }
+                            });
                         }
                     });
-                });
+
+                } else {
+                    res.send({'status': 1001, 'message': 'The task does not be modified ' , 'data': err});
+                }
                 
             } else {
-                res.send({'status': 1001, 'message': 'The task isn\'t start, cannot be update' , 'data': err});
+                res.send({'status': 1001, 'message': 'The task does not exist ' , 'data': err});
             }
         }
     })
@@ -161,6 +165,20 @@ router.post('/api/task/delete',(req,res) => {
                 res.send({'status': 1000, 'message': 'Update successful！', 'data': data1});
             }
         });
+    });
+    
+});
+
+//batch update task status
+router.get('/api/task/updateTasksStatus',(req,res) => {
+    models.Task.updateMany({_id: req.body.id},(err,data) => {
+        if (err) {
+            res.send({'status': 1002, 'message': 'Delete failure!', 'data': err});
+        } else {
+        	res.send({'status': 1000, 'message': 'batch update successful!', 'data': data});
+
+        }
+
     });
     
 });
