@@ -12,11 +12,10 @@
         <img class="cup" src="../assets/tasks-empty-pic.png">
       </div>
 
-      <div id="intro">
+      <div class="col-md-12">
         <p>Press "+" to create a new task, they'll show up here in chronological order.</p>
         <p>
-          <b-button @click="exitTaski">Exit</b-button>
-          <router-link to="/TaskList">Taskis</router-link>
+          <b-button @click="exitTaski" type="button" class="btn btn-warning btn-sm">Exit</b-button>
         </p>
       </div>
 
