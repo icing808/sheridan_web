@@ -114,7 +114,7 @@ h6{
 }
 h2,h5{
     text-align:left;
-    margin-left:40%;
+    margin-left:14%;
     color:#1B052F;
 }
 p{
@@ -122,7 +122,7 @@ p{
 }
 #back{
     position:absolute;
-    left:38%;
+    left:12%;
     top:6%;
 }
 
@@ -134,8 +134,8 @@ p{
 .log{
     background:linear-gradient(to right, #04B4EE,#1ED9D3);
     color:white;
-    margin-top:-2%;
-    margin-bottom:1%;
+    margin-top:8%;
+    margin-bottom:6%;
     
 }
 .snup{
@@ -144,13 +144,15 @@ p{
     border-image-slice:1;
     background-color:white;
     border-radius:8px;
-    margin-top:1%;
+    margin-top:6%;
 }
 .cup{
-    width: 100px
+    width: 100px;
+    margin-top:4%;
 }
 #email{
-    margin-top: 5%
+    margin-top: 5%;
+    margin-bottom: 6%;
 }
 #psd{
     margin-top: 2%;
