@@ -12,7 +12,7 @@
         <img class="cup" src="../assets/tasks-empty-pic.png">
       </div>
 
-      <div class="col-md-12">
+      <div class="instruction">
         <p>Press "+" to create a new task, they'll show up here in chronological order.</p>
         <p>
           <b-button @click="exitTaski" type="button" class="btn btn-warning btn-sm">Exit</b-button>
@@ -225,6 +225,12 @@ p{
     font-size:15px;
     margin-bottom:4%;
 }
+.instruction{
+    width:280px;
+    text-align: left;
+    margin-left: 16%;
+    margin-top: 10%;
+}
 /* template{
     background-color:green;
 } */
@@ -312,6 +318,7 @@ p{
 .footer{
   position:fixed;
   bottom: 2%;
+  /* margin-left:8%; */
 }
 
 .footer-button{

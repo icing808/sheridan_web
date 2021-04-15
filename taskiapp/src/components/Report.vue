@@ -1,7 +1,9 @@
 <template>
   <div>
     <div>
-      <b-button @click="$router.go(-1)">Back</b-button>
+      <b-button variant="outline-primary" @click="$router.go(-1)">
+            <img id="back" src="../assets/back.png">
+      </b-button>
     </div>
     <h5>Hi, {{ this.GLOBAL.userName }}, Your Taski Report: </h5>
     <div class="col-md-12">
@@ -103,5 +105,9 @@ export default {
 </script>
 
 <style scoped>
-
+#back{
+    position:absolute;
+    left:12%;
+    top:6%;
+}
 </style>

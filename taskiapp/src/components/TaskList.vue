@@ -6,6 +6,20 @@
         </b-button>
         <h3>Tasks</h3>
         </div>
+        <!-- Footer -->
+        <div class="footer-container">
+            <div class="footer">
+                <b-button class="footer-button" @click="$router.push('Home')">
+                <img src="../assets/TaskList-normal.png">
+                </b-button>
+                <b-button class="footer-button" @click="$router.push('TaskList')">
+                <img src="../assets/calendar-normal.png">
+                </b-button>
+                <b-button class="footer-button" @click="$router.push('Account').catch(err=>err)">
+                <img src="../assets/user-selected.png">
+                </b-button>
+            </div>
+        </div>
         <div>
             <div>{{msg}}</div>
             <b-card no-body>
@@ -193,6 +207,7 @@
         <!-- <p><router-link to="/AddTask2">Add Task</router-link></p>
         <p><router-link to="/Home">Home</router-link></p> -->
     </div>
+    
 </template>
 <script>
 // import Footer from './Footer'
@@ -463,5 +478,32 @@ a {
 .completed{
 
 }
+.nav-pills .mytabs .nav-link:not(.active) {
+    background-color:none;
+  }
 
+  .nav-pills .mytabs .nav-link {
+    background-color: #1FDAD2;
+  }
+.footer-container{
+   width:100%;
+   /* border:1px solid red; */
+   display: flex;
+   align-items: center; 
+   justify-content: center;  
+
+}
+.footer{
+  position:fixed;
+  bottom: 2%;
+  /* margin-left:8%; */
+}
+
+.footer-button{
+  display: inline-block;
+  justify-content: space-around;
+  margin:0 20px;
+  background-color: white;
+  border:none;
+}
 </style>
