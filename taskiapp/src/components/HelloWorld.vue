@@ -20,11 +20,24 @@
         </p>
       </div>
 
+
       <!-- TODO: Add statement when have tasks -->
 
       <!-- For echarts dom container -->
       <h5>Hi, {{ this.GLOBAL.userName }}, Your Taski Report: </h5>
       <div id="taskReportDiv" style="width: 600px;height: 400px;"></div>
+      <!-- Footer -->
+      <div class="footer">
+          <b-button class="footer-button" @click="$router.push('Home').catch(err=>err)">
+            <img src="../assets/TaskList-selected.png">
+          </b-button>
+          <b-button class="footer-button" @click="$router.push('TaskList')">
+            <img src="../assets/calendar-normal.png">
+          </b-button>
+          <b-button class="footer-button" @click="$router.push('Account')">
+            <img src="../assets/user-normal.png">
+          </b-button>
+      </div>
 
     </div>
     <template #overlay >
@@ -88,6 +101,7 @@
       </b-button>
       </div> -->
     </template>
+
   </b-overlay>
 </template>
 
@@ -354,5 +368,15 @@ p{
 .c1{
     width:32%;
     margin-left:-4%;
+}
+
+.footer{
+  position:fixed;
+  bottom: 0;
+}
+
+.footer-button{
+  display: inline-block;
+  justify-content: space-around;
 }
 </style>
