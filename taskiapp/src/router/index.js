@@ -11,6 +11,7 @@ import AddTask2 from '@/components/AddTask2'
 // import NavBar from '@/components/NavBar'
 import Calendar from '@/components/Calendar'
 import Account from '@/components/Account'
+import Report from '@/components/Report'
 
 Vue.use(Router)
 
@@ -56,6 +57,10 @@ export default new Router({
       path: "/Account",
       name: "Account",
       component: Account
+    },{
+      path: "/Report",
+      name: "Report",
+      component: Report
     }
   ]
 })
