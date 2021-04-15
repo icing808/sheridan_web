@@ -10,10 +10,10 @@
         <h6>{{msg}}</h6>
         <img src="../assets/login-pic.png" id="img" class="cup">
         <div id="email">
-            <input type="text" placeholder="Email" v-model="email" >
+            <input type="email" placeholder="Email" v-model="email" >
         </div>
         <div id="psd">
-            <input type="text" placeholder="Password" v-model="password">
+            <input type="password" placeholder="Password" v-model="password">
         </div>
         <div>
             <b-button @click="login" class="btn log">
