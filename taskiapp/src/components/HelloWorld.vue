@@ -22,8 +22,10 @@
 
       <!-- TODO: Add statement when have tasks -->
 
-      <!-- <h1>{{ msg }}</h1>
-      <h1>Hi, {{ this.GLOBAL.userName }}</h1> -->
+      <!-- For echarts dom container -->
+      <h5>Hi, {{ this.GLOBAL.userName }}, Your Taski Report: </h5>
+      <div id="taskReportDiv" style="width: 600px;height: 400px;"></div>
+
     </div>
     <template #overlay >
       <div id="temp">
@@ -92,6 +94,8 @@
 
 
 <script>
+import * as echarts from 'echarts'
+
 export default {
   name: 'HelloWorld',
   data(){
@@ -105,7 +109,9 @@ export default {
             level: '',
             array: [],
             showAll: false,
-            show: false
+            show: false,
+            charts: '',
+            opinion:['Pending', 'On going', 'Completed', 'Ignore', 'Expired']           
         }
     },
     methods:{
@@ -164,6 +170,48 @@ export default {
             path: '/Login',
             replace: true
           });
+        },
+        drawPie(id, opinionData){
+          this.charts = echarts.init(document.getElementById(id));
+          this.charts.setOption({
+              tooltip: {
+              trigger: 'item',
+            },
+            legend: {
+              orient: 'vertical',
+              x: 'left',
+              data:this.opinion
+            },
+            series: [
+              {
+                name:'Task Count(%)',
+                type:'pie',
+                radius:['50%','70%'],
+                avoidLabelOverlap: false,
+                label: {
+                  normal: {
+                    show: false,
+                    position: 'center'
+                  },
+                  emphasis: {
+                    show: true,
+                    textStyle: {
+                      fontSize: '30',
+                      fontWeight: 'blod'
+                    }
+                  }
+                },
+                labelLine: {
+                  normal: {
+                    show: false
+                  }
+                },
+                data: opinionData
+              }
+            ]
+
+          })
+
         }
     },
     created() {
@@ -174,7 +222,22 @@ export default {
                 path: '/Login',
                 replace: true
               });
-          } 
+          }
+    },
+    mounted() {
+      let opinionData = [];
+      //get pie chart data
+      this.$http.post('/api/task/getTaskiData', {userId: this.GLOBAL.userId}).then((res) => {
+        if(res.data.status == 1000){
+          opinionData = res.data.data
+          this.$nextTick(function() {
+            this.drawPie('taskReportDiv', opinionData)
+          })
+        }
+      }).catch((err)=>{
+          console.log(err)
+      });
+      
     }
 }
 </script>
