@@ -1,7 +1,8 @@
 <template>
-    <div>
+    <b-overlay :show="show" rounded="sm" @shown="onShown" @hidden="onHidden">
+        <div>
         <div class="header">
-        <b-button id="add" ref="show" @click="gotoAddTask">
+        <b-button id="add" ref="show" :disabled="show" @click="show = true">
           <img src="../assets/tasks-add-task.png">
         </b-button>
         <h3>Tasks</h3>
@@ -10,7 +11,7 @@
         <div class="footer-container">
             <div class="footer">
                 <b-button class="footer-button" @click="$router.push('Home').catch(err=>err)">
-                <img src="../assets/calendar-selected.png">
+                <img src="../assets/TaskList-selected.png">
                 </b-button>
                 <b-button class="footer-button" @click="$router.push('Calendar')">
                 <img src="../assets/calendar-normal.png">
@@ -24,62 +25,12 @@
             <div>{{msg}}</div>
             <b-card no-body>
                 <b-tabs pills card align="center" class="mytabs">
-                <!-- <b-tab title="All" active @click="getAll(-1)">
-                    <b-card-text>
-                        <input type="hidden" v-model="q_status">
-                        <div v-show="showAll">
-                            <p v-for="item in array" :key="item._id">
-
-                                    <b-form-checkbox
-                                        id="checkbox-1"
-                                        v-model="status"
-                                        name="checkbox-1"
-                                        value="accepted"
-                                        unchecked-value="not_accepted"
-                                    >
-                                    I accept the terms and use
-                                    </b-form-checkbox>
-
-                                <ul>
-                                    <li>UserId: {{item.user_id}}</li>
-                                    <li v-if="1 === item.category_id" >Category: Study</li>
-                                    <li v-else-if="2 === item.category_id" >Category: Work</li>
-                                    <li v-else-if="3 === item.category_id" >Category: Other</li>
-                                    <li v-else>Category: No Category</li>
-
-                                    <li v-if="1 === item.level" >Level: General</li>
-                                    <li v-else-if="2 === item.level" >Level: Important</li>
-                                    <li v-else-if="3 === item.level" >Level: Emergent</li>
-                                    <li v-else>Level: No Level</li>
-
-                                    <li>Title: {{item.title}}</li>
-                                    <li>Content: {{item.content}}</li>
-                                    <li>Start Time: {{item.start_time}}</li>
-                                    <li>End Time: {{item.end_time}}</li>
-                                    <li v-if="0 === item.status" >Status: Pending</li>
-                                    <li v-else-if="1 === item.status" >Status: On going</li>
-                                    <li v-else-if="2 === item.status" >Status: Finish</li>
-                                    <li v-else-if="3 === item.status" >Status: Ignore</li>
-                                    <li v-else-if="4 === item.status" >Status: Expire</li>
-                                    <li v-else>Status: No Status</li>
-                                    <li v-show="delBtnShow"><button @click="deleteone(item._id)">Delete</button></li>
-                                    <li v-show="doneBtnShow"><button @click="updateStatus(item._id)">Done</button></li>
-                                </ul>
-                            </p>
-                        </div>
-                    </b-card-text>
-                </b-tab> -->
                 <b-tab title="Ongoing" @click="getAll(-1)" pill1>
                     <b-card-text>
                         <input type="hidden" v-model="q_status">
                         <div class="container" v-show="showAll">
                             <div  v-for="item in array" :key="item._id">
 
-                                    <!-- <li>UserId: {{item.user_id}}</li> -->
-                                    <!-- <li v-if="1 === item.category_id" >Category: Study</li>
-                                    <li v-else-if="2 === item.category_id" >Category: Work</li>
-                                    <li v-else-if="3 === item.category_id" >Category: Other</li>
-                                    <li v-else>Category: No Category</li> -->
                                     <b-form-checkbox
                                         class="set-status c1"
                                         size="lg"
@@ -102,12 +53,6 @@
                                     <!-- <li>Content: {{item.content}}</li>
                                     <li>Start Time: {{item.start_time}}</li> -->
                                     <p id="duetime"><img id="timeicon" src="../assets/tasks-duetime-icon.png">  {{item.end_time}}</p>
-                                    <!-- <li v-if="0 === item.status" >Status: Pending</li>
-                                    <li v-else-if="1 === item.status" >Status: On going</li>
-                                    <li v-else-if="2 === item.status" >Status: Finish</li>
-                                    <li v-else-if="3 === item.status" >Status: Ignore</li>
-                                    <li v-else-if="4 === item.status" >Status: Expire</li>
-                                    <li v-else>Status: No Status</li> -->
                                     </div>
 
                                     <div class="btns">
@@ -167,47 +112,58 @@
                 </b-tabs>
             </b-card>
         </div>
-        <!-- <h1>Task List</h1>
-        <button @click="getAll(-1)">Get All Task</button>
-        <button @click="getAll(0)">Get Pending Task</button>
-        <button @click="getAll(1)">Get On going Task</button>
-        <button @click="getAll(2)">Get Finish Task</button>
-        <input type="hidden" v-model="q_status">
-        <div v-show="showAll">
-            <p v-for="item in array" :key="item._id">
-                <ul>
-                    <li>UserId: {{item.user_id}}</li>
-                    <li v-if="1 === item.category_id" >Category: Study</li>
-                    <li v-else-if="2 === item.category_id" >Category: Work</li>
-                    <li v-else-if="3 === item.category_id" >Category: Other</li>
-                    <li v-else>Category: No Category</li>
-
-                    <li v-if="1 === item.level" >Level: General</li>
-                    <li v-else-if="2 === item.level" >Level: Important</li>
-                    <li v-else-if="3 === item.level" >Level: Emergent</li>
-                    <li v-else>Level: No Level</li>
-
-                    <li>Title: {{item.title}}</li>
-                    <li>Content: {{item.content}}</li>
-                    <li>Start Time: {{item.start_time}}</li>
-                    <li>End Time: {{item.end_time}}</li>
-                    <li v-if="0 === item.status" >Status: Pending</li>
-                    <li v-else-if="1 === item.status" >Status: On going</li>
-                    <li v-else-if="2 === item.status" >Status: Finish</li>
-                    <li v-else-if="3 === item.status" >Status: Ignore</li>
-                    <li v-else-if="4 === item.status" >Status: Expire</li>
-                    <li v-else>Status: No Status</li>
-                    <li v-show="delBtnShow"><button @click="deleteone(item._id)">Delete</button></li>
-                    <li v-show="doneBtnShow"><button @click="updateStatus(item._id)">Done</button></li>
-                </ul>
-            </p>
         </div>
-        <div>{{msg}}</div> -->
-        <!-- <Footer /> -->
-        <!-- <p><router-link to="/AddTask2">Add Task</router-link></p>
-        <p><router-link to="/Home">Home</router-link></p> -->
-    </div>
-    
+        <template #overlay >
+        <div id="temp">
+            <h3 class="title t1">New Task</h3>
+            <b-button class="cancel" ref="cancel" aria-describedby="cancel-label" @click="show = false">Cancel</b-button>
+            <b-button class="done" @click="addTask">Done</b-button>
+        </div>
+        <div>
+            <div class="underline u1" >
+                <input type="text" v-model="title" placeholder="Title">
+            </div>
+            <div class="underline u2">
+                <div class="title t2"><strong>Description</strong></div>
+                <input type="text" v-model="content" placeholder="Content">
+            </div>
+            <div class="underline u3">
+                <div class="title t2 "><strong>Start Date</strong></div><br>
+                <!-- <input class="form-control" type="text" v-model="startTime" placeholder="Start Time"> -->
+                <b-form-input type="date" v-model="startTime" class="form-control"></b-form-input>
+            </div>
+            <div class="underline u3">
+                <div class="title t2"><strong>End Date</strong></div><br>
+                <!-- <input class="form-control" type="text" v-model="endTime" placeholder="End Time"> -->
+                <b-form-input type="date" v-model="endTime" class="form-control"></b-form-input>
+            </div>
+
+            <div class="barrage-size">
+                <div class="title t2"><strong>Category:</strong></div><br><br>
+                <div class="radio r1">
+                <!-- <input type="radio" value="1" v-model="categoryId"> <span id="s-size">Study</span>
+                <input type="radio" value="2" v-model="categoryId"> <span id="m-size">Work</span>
+                <input type="radio" value="3" v-model="categoryId"> <span id="l-size">Other</span> -->
+                <b-form-radio class="c1" name="categoryId" size="lg" value="1" v-model="categoryId"><p>Study</p></b-form-radio>
+                <b-form-radio class="c1" name="categoryId" size="lg" value="2" v-model="categoryId"><p>Work</p></b-form-radio>
+                <b-form-radio class="c1" name="categoryId" size="lg" value="3" v-model="categoryId"><p>Other</p></b-form-radio>
+                </div>
+            </div>
+            <div>
+                <div class="title t2"><strong>Level:</strong></div><br>
+                <div class="radio">
+                <!-- <input type="radio" value="1" v-model="level"> <span id="s-size">General</span>
+                <input type="radio" value="2" v-model="level"> <span id="m-size">Important</span>
+                <input type="radio" value="3" v-model="level"> <span id="l-size">Emergent</span> -->
+                    <b-form-radio class="c2" name="level" size="lg" value="1" v-model="level"><p>General</p></b-form-radio>
+                    <b-form-radio class="c2" name="level" size="lg" value="2" v-model="level"><p>Important</p></b-form-radio>
+                    <b-form-radio class="c2" name="level" size="lg" value="3" v-model="level"><p>Emergent</p></b-form-radio>
+                </div>
+            </div>
+
+      </div>
+        </template>
+    </b-overlay>
 </template>
 <script>
 // import Footer from './Footer'
@@ -221,6 +177,7 @@ export default {
         return{
             msg: '',
             array: [],
+            show: false,
             showAll: false,
             q_status: '',
             status: 'not_accepted',
@@ -228,6 +185,53 @@ export default {
         }
     },
     methods:{
+        addTask(){
+          //alert("userId:"+this.GLOBAL.userId);
+          this.showAll = false
+          if(this.title == ""
+              || this.content == ""
+              || this.startTime == ""
+              || this.endTime == ""
+              || this.categoryId == ""
+              || this.level == ""
+          ){
+              this.msg = "Each field is required"
+              return
+          }
+          let params = {
+              title: this.title,
+              content: this.content,
+              startTime: this.startTime,
+              endTime: this.endTime,
+              categoryId: this.categoryId,
+              level: this.level,
+              userId: this.GLOBAL.userId
+          }
+          this.$http.post('/api/task/addTask',params).then((res)=>{
+              console.log(res)
+              if(res.data.status == 1000){
+                  alert(res.data.message)
+                  this.msg = res.data.message
+                  this.$router.push({
+                      path: '/TaskList',
+                      replace: true
+                      });
+              }else{
+                  //alert(res.data.message)
+                  this.msg = res.data.message
+              }
+          }).catch((err)=>{
+              console.log(err)
+          })
+        },
+        onShown() {
+            // Focus the cancel button when the overlay is showing
+            this.$refs.cancel.focus()
+        },
+        onHidden() {
+            // Focus the show button when the overlay is removed
+            this.$refs.show.focus()
+        },
         getAll(statusId){
             this.q_status = statusId;
             let params = {
@@ -499,5 +503,78 @@ a {
   margin:0 20px;
   background-color: white;
   border:none;
+}
+
+#temp{
+    margin-top:50%;
+    margin-left:-10%;
+    /* border:1px solid red; */
+    width:120%;
+}
+.title{
+    font-size:20px;
+    position:relative;
+    float:left;
+    margin-top:2%;
+}
+.t1{
+    margin-left:10%
+}
+.t2{
+    font-size:16px;
+}
+
+.cancel, .done{
+    background-color:white;
+    border:none;
+    font-size:18px;
+    outline: none;
+}
+.cancel{
+    color:grey;
+    margin-left:10%
+}
+.done{
+    color: #11C7BA;
+}
+.underline{
+    margin-top: 5%
+}
+.u1{
+    margin-top:10%;
+}
+.u2 input{
+    height:60px;
+}
+.u3 input{
+    background-color:#F5F8F7;
+}
+.underline input{
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #ccc;
+    width:290px;
+    height:36px;
+}
+.u3 input:focus{
+    box-shadow: 0 0 4px 1px #11C7BA;
+}
+.radio{
+    position:relative;
+    display:inline-block;
+    font-size:12px;
+    /* border:1px solid red; */
+    width:110%;
+}
+
+.c1,.c2{
+    /* border:1px solid red; */
+    width:35%;
+    float:left;
+    margin-left:-3%;
+}
+.c1{
+    width:32%;
+    margin-left:-4%;
 }
 </style>
