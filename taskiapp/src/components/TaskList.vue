@@ -492,9 +492,10 @@ a {
 
 }
 .footer{
+  width:100%;
   position:fixed;
-  bottom: 2%;
-  /* margin-left:8%; */
+  bottom: 0;
+  background-color: white;
 }
 
 .footer-button{
