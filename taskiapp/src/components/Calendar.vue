@@ -180,7 +180,7 @@ export default {
 }
 .list{
   padding-top: 2%;
-  margin-bottom:4%;
+  margin-bottom:6%;
   margin-left: 1%;
   width:340px;
   height: 80px;
@@ -210,8 +210,10 @@ export default {
 }
 
 .footer{
+  width:100%;
   position:fixed;
-  bottom: 2%;
+  bottom: 0;
+  background-color: white;
   /* margin-left:8%; */
 }
 
