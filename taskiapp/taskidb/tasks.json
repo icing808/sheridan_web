@@ -1,0 +1,217 @@
+[{
+  "_id": {
+    "$oid": "6075c4012066b5c07d093027"
+  },
+  "user_id": "60758f942066b5c07d093024",
+  "title": "New Title",
+  "content": "some words here...",
+  "start_time": "2021-04-15 03:00:00",
+  "end_time": "2021-04-15 05:00:00",
+  "category_id": 2,
+  "level": 2,
+  "status": 2,
+  "created_on": {
+    "$date": "2021-04-13T16:17:05.549Z"
+  },
+  "modified_on": {
+    "$date": "2021-04-13T16:17:23.486Z"
+  }
+},{
+  "_id": {
+    "$oid": "6076fbc2ad27c70fe46f98ef"
+  },
+  "user_id": "60758f942066b5c07d093024",
+  "title": "Good job",
+  "content": "Good job",
+  "start_time": "2021-04-16",
+  "end_time": "2021-04-28",
+  "category_id": 2,
+  "level": 1,
+  "status": 3,
+  "created_on": {
+    "$date": "2021-04-14T14:27:14.681Z"
+  },
+  "modified_on": {
+    "$date": "2021-04-14T22:44:05.198Z"
+  }
+},{
+  "_id": {
+    "$oid": "6077709d54e71ba75366b5af"
+  },
+  "user_id": "60775043787824811e85b17f",
+  "title": "test1",
+  "content": "test1",
+  "start_time": "2021-04-15",
+  "end_time": "2021-04-16",
+  "category_id": 1,
+  "level": 1,
+  "status": 1,
+  "created_on": {
+    "$date": "2021-04-14T22:45:49.599Z"
+  },
+  "modified_on": {
+    "$date": "2021-04-14T23:08:43.804Z"
+  }
+},{
+  "_id": {
+    "$oid": "6077754303abf2a8a3c1e3ab"
+  },
+  "user_id": "60775043787824811e85b17f",
+  "title": "test3-dsdsd",
+  "content": "test3dsadsa",
+  "start_time": "2021-04-15 04:00:00",
+  "end_time": "2021-04-15 06:00:00",
+  "category_id": 1,
+  "level": 2,
+  "status": 2,
+  "created_on": {
+    "$date": "2021-04-14T23:05:39.525Z"
+  },
+  "modified_on": {
+    "$date": "2021-04-15T04:49:06.024Z"
+  }
+},{
+  "_id": {
+    "$oid": "6077a038c1a078c5f580b46f"
+  },
+  "user_id": "60775043787824811e85b17f",
+  "title": "de",
+  "content": "de",
+  "start_time": "2021-04-16",
+  "end_time": "2021-04-16",
+  "category_id": 1,
+  "level": 1,
+  "status": 3,
+  "created_on": {
+    "$date": "2021-04-15T02:08:56.970Z"
+  },
+  "modified_on": {
+    "$date": "2021-04-15T02:08:56.970Z"
+  }
+},{
+  "_id": {
+    "$oid": "6077a048c1a078c5f580b470"
+  },
+  "user_id": "60775043787824811e85b17f",
+  "title": "43",
+  "content": "43",
+  "start_time": "2021-04-15 02:00:00",
+  "end_time": "2021-04-17 01:00:00",
+  "category_id": 1,
+  "level": 1,
+  "status": 1,
+  "created_on": {
+    "$date": "2021-04-15T02:09:12.256Z"
+  },
+  "modified_on": {
+    "$date": "2021-04-15T04:31:53.088Z"
+  }
+},{
+  "_id": {
+    "$oid": "6077a10bc1a078c5f580b471"
+  },
+  "user_id": "60775043787824811e85b17f",
+  "title": "f3",
+  "content": "g3",
+  "start_time": "2021-04-14",
+  "end_time": "2021-04-14",
+  "category_id": 1,
+  "level": 2,
+  "status": 2,
+  "created_on": {
+    "$date": "2021-04-15T02:12:27.583Z"
+  },
+  "modified_on": {
+    "$date": "2021-04-15T05:09:01.881Z"
+  }
+},{
+  "_id": {
+    "$oid": "6077c9f59345f0dd57a7fd66"
+  },
+  "user_id": "60775043787824811e85b17f",
+  "title": "test6",
+  "content": "test6",
+  "start_time": "2021-04-06",
+  "end_time": "2021-04-16",
+  "category_id": 1,
+  "level": 2,
+  "status": 1,
+  "created_on": {
+    "$date": "2021-04-15T05:07:01.393Z"
+  },
+  "modified_on": {
+    "$date": "2021-04-15T05:09:01.883Z"
+  }
+},{
+  "_id": {
+    "$oid": "6077cf823c7377e1bdf4bd17"
+  },
+  "user_id": "60775043787824811e85b17f",
+  "title": "test6",
+  "content": "test6",
+  "start_time": "2021-04-15 20:30",
+  "end_time": "2021-04-15 21:30",
+  "category_id": 2,
+  "level": 2,
+  "status": 4,
+  "created_on": {
+    "$date": "2021-04-15T05:30:42.480Z"
+  },
+  "modified_on": {
+    "$date": "2021-04-15T05:30:58.120Z"
+  }
+},{
+  "_id": {
+    "$oid": "607810de60ae7d48e0ed104f"
+  },
+  "user_id": "6073d79970b3f5ee02b0b249",
+  "title": "12",
+  "content": "12",
+  "start_time": "2021-04-16",
+  "end_time": "2021-04-22",
+  "category_id": 2,
+  "level": 2,
+  "status": 0,
+  "created_on": {
+    "$date": "2021-04-15T10:09:34.278Z"
+  },
+  "modified_on": {
+    "$date": "2021-04-15T10:09:34.278Z"
+  }
+},{
+  "_id": {
+    "$oid": "6078197f62590904cad771b7"
+  },
+  "user_id": "60775043787824811e85b17f",
+  "title": "test8",
+  "content": "test8",
+  "start_time": "2021-04-17 14:10",
+  "end_time": "2021-04-17 15:10",
+  "category_id": 1,
+  "level": 1,
+  "status": 0,
+  "created_on": {
+    "$date": "2021-04-15T10:46:23.995Z"
+  },
+  "modified_on": {
+    "$date": "2021-04-15T10:46:23.995Z"
+  }
+},{
+  "_id": {
+    "$oid": "607861dc8c7b2128b4e42684"
+  },
+  "user_id": "6073d79970b3f5ee02b0b249",
+  "title": "123",
+  "content": "123",
+  "start_time": "2011-01-12",
+  "end_time": "2011-02-18",
+  "category_id": 1,
+  "level": 1,
+  "status": 0,
+  "created_on": {
+    "$date": "2021-04-15T15:55:08.658Z"
+  },
+  "modified_on": {
+    "$date": "2021-04-15T15:55:08.658Z"
+  }
+}]

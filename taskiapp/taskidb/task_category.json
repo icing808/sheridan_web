@@ -1,0 +1,19 @@
+[{
+  "_id": {
+    "$oid": "6074bf7ee87ab2192c8bb6f8"
+  },
+  "c_name": "study",
+  "c_id": 1
+},{
+  "_id": {
+    "$oid": "6074bfa064b88eccb91df57e"
+  },
+  "c_name": "work",
+  "c_id": 2
+},{
+  "_id": {
+    "$oid": "6074c04664b88eccb91df57f"
+  },
+  "c_name": "other",
+  "c_id": 3
+}]
