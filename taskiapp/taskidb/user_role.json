@@ -1,0 +1,28 @@
+[{
+  "_id": {
+    "$oid": "6074ba4ee87ab2192c8bb6f4"
+  },
+  "role_id": 1,
+  "role_name": "Admin",
+  "created_on": {
+    "$timestamp": {
+      "t": 0,
+      "i": 0
+    }
+  },
+  "modified_on": {
+    "$date": "2021-04-11T16:00:00Z"
+  }
+},{
+  "_id": {
+    "$oid": "6074bb7fe87ab2192c8bb6f5"
+  },
+  "role_id": 2,
+  "role_name": "visitor",
+  "created_on": {
+    "$timestamp": {
+      "t": 0,
+      "i": 0
+    }
+  }
+}]

@@ -1,0 +1,175 @@
+[{
+  "_id": {
+    "$oid": "6073b1e5e87ab2192c8bb6ef"
+  },
+  "name": "Lubie",
+  "password": "123456",
+  "role_id": 2,
+  "email": "lubie@163.com"
+},{
+  "_id": {
+    "$oid": "6073d79970b3f5ee02b0b249"
+  },
+  "name": "jj",
+  "password": "jj123",
+  "__v": 0,
+  "role_id": 2,
+  "email": "jj@123.com"
+},{
+  "_id": {
+    "$oid": "6074b849e87ab2192c8bb6f3"
+  },
+  "name": "zhaolu",
+  "password": "123456",
+  "email": "zhaolu@sheridancollege.ca",
+  "born_date": {
+    "$date": "1999-12-31T16:00:00Z"
+  },
+  "role_id": 1,
+  "created_on": {
+    "$date": "2021-04-12T16:00:00Z"
+  },
+  "modified_on": {
+    "$date": "2021-04-12T16:00:00Z"
+  }
+},{
+  "_id": {
+    "$oid": "6075459b6fbc97181f8bef07"
+  },
+  "name": "gg",
+  "email": "gg@aa.com",
+  "password": "123",
+  "role_id": 2,
+  "created_on": {
+    "$date": "2021-04-13T07:17:47.811Z"
+  },
+  "modified_on": {
+    "$date": "2021-04-13T07:17:47.811Z"
+  }
+},{
+  "_id": {
+    "$oid": "607561e1c8caee1f0fcce1f8"
+  },
+  "name": "f3",
+  "email": "f3@kk.com",
+  "password": "123",
+  "role_id": 2,
+  "created_on": {
+    "$date": "2021-04-13T09:18:25.058Z"
+  },
+  "modified_on": {
+    "$date": "2021-04-13T09:18:25.058Z"
+  }
+},{
+  "_id": {
+    "$oid": "60758f942066b5c07d093024"
+  },
+  "name": "AAABB",
+  "email": "aaabb@gmail.com",
+  "password": "123",
+  "role_id": 2,
+  "created_on": {
+    "$date": "2021-04-13T12:33:24.835Z"
+  },
+  "modified_on": {
+    "$date": "2021-04-13T12:33:24.835Z"
+  }
+},{
+  "_id": {
+    "$oid": "6075aa550149ba30a0275368"
+  },
+  "name": "cassie",
+  "email": "cassie930814@oulook.com",
+  "password": "123456",
+  "role_id": 2,
+  "created_on": {
+    "$date": "2021-04-13T14:27:33.361Z"
+  },
+  "modified_on": {
+    "$date": "2021-04-13T14:27:33.361Z"
+  }
+},{
+  "_id": {
+    "$oid": "6076edf3864f12533efd83e6"
+  },
+  "name": "cassie",
+  "email": "cassieyin0814@gmail.com",
+  "password": "123456",
+  "role_id": 2,
+  "created_on": {
+    "$date": "2021-04-14T13:28:19.435Z"
+  },
+  "modified_on": {
+    "$date": "2021-04-14T13:28:19.435Z"
+  }
+},{
+  "_id": {
+    "$oid": "60773239787824811e85b17c"
+  },
+  "name": "sss",
+  "email": "sss@jjk.com",
+  "password": "123",
+  "role_id": 2,
+  "created_on": {
+    "$date": "2021-04-14T18:19:37.439Z"
+  },
+  "modified_on": {
+    "$date": "2021-04-14T18:19:37.439Z"
+  }
+},{
+  "_id": {
+    "$oid": "60775043787824811e85b17f"
+  },
+  "name": "ss",
+  "email": "ss@123.com",
+  "password": "123",
+  "role_id": 2,
+  "created_on": {
+    "$date": "2021-04-14T20:27:47.374Z"
+  },
+  "modified_on": {
+    "$date": "2021-04-14T20:27:47.374Z"
+  }
+},{
+  "_id": {
+    "$oid": "60787f10fe3128279b6e636d"
+  },
+  "name": "Nacy",
+  "email": "nacy@123.com",
+  "password": "123",
+  "role_id": 2,
+  "created_on": {
+    "$date": "2021-04-15T17:59:44.090Z"
+  },
+  "modified_on": {
+    "$date": "2021-04-15T17:59:44.090Z"
+  }
+},{
+  "_id": {
+    "$oid": "607884a9fe3128279b6e636e"
+  },
+  "name": "nacy2",
+  "email": "nacy2@123.com",
+  "password": "nacy123456",
+  "role_id": 2,
+  "created_on": {
+    "$date": "2021-04-15T18:23:37.973Z"
+  },
+  "modified_on": {
+    "$date": "2021-04-15T18:23:37.973Z"
+  }
+},{
+  "_id": {
+    "$oid": "607898712e1ff0319b5cb280"
+  },
+  "name": "luuuu",
+  "email": "luuuu11@gmail.com",
+  "password": "luuuu2345",
+  "role_id": 2,
+  "created_on": {
+    "$date": "2021-04-15T19:48:01.509Z"
+  },
+  "modified_on": {
+    "$date": "2021-04-15T19:48:01.509Z"
+  }
+}]

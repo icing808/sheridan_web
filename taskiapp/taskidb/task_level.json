@@ -1,0 +1,19 @@
+[{
+  "_id": {
+    "$oid": "6074c07fe87ab2192c8bb6f9"
+  },
+  "level": 3,
+  "level_name": "Emergent"
+},{
+  "_id": {
+    "$oid": "6074c12864b88eccb91df580"
+  },
+  "level": 2,
+  "level_name": "Important"
+},{
+  "_id": {
+    "$oid": "6074c18864b88eccb91df581"
+  },
+  "level": 1,
+  "level_name": "General"
+}]
