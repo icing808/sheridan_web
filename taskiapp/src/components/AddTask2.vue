@@ -9,42 +9,43 @@
             </b-button>
         </b-card>
         <template #overlay>
-            <div>
-                <h2 v-if="tId == null">New Task</h2>
-                <h2 v-else>Edit Task</h2>
-                <b-button ref="cancel" aria-describedby="cancel-label" @click="backToTaskList">Cancel</b-button>
-                <b-button @click="addTask">Done</b-button>
+            <div id="temp">
+                <h2 class="title t1" v-if="tId == null">New Task</h2>
+                <h2 class="title t1" v-else>Edit Task</h2>
+                <b-button class="cancel" ref="cancel" aria-describedby="cancel-label" @click="backToTaskList">Cancel</b-button>
+                <b-button class="done" @click="addTask">Done</b-button>
             </div>
             <div>
                 <div>{{msg}}</div>
-                <div>
+                <div class="underline u1">
                     <input type="hidden" v-model="id">
+                    <div class="title t2">Title</div>
                     <input type="text" v-model="title" placeholder="Title">
                 </div>
-                <div>
-                    <div>Description</div>
+                <div class="underline u2">
+                    <div class="title t2">Description</div>
                     <input type="text" v-model="content" placeholder="Content">
                 </div>
-                <div>
-                    <div>Start Date</div>
+                <div class="underline u3">
+                    <div class="title t2">Start Date</div>
                     <input type="text" v-model="startTime" placeholder="Start Time">
                 </div>
-                <div>
-                    <div>End Date</div>
+                <div class="underline u3">
+                    <div class="title t2">End Date</div>
                     <input type="text" v-model="endTime" placeholder="End Time">
                 </div>
 
-                <div class="barrage-size">
-                    Category:
-                    <input type="radio" value="1" v-model="categoryId"> <span id="s-size">Study</span>
-                    <input type="radio" value="2" v-model="categoryId"> <span id="m-size">Work</span>
-                    <input type="radio" value="3" v-model="categoryId"> <span id="l-size">Other</span>
+                <div class="col-md-12">
+                    <p>Category:</p>
+                    <p><input type="radio" value="1" v-model="categoryId"> <span id="s-size">Study</span></p>
+                    <p><input type="radio" value="2" v-model="categoryId"> <span id="m-size">Work</span></p>
+                    <p><input type="radio" value="3" v-model="categoryId"> <span id="l-size">Other</span></p>
                 </div>
                 <div>
-                    Level:
-                    <input type="radio" value="1" v-model="level"> <span id="s-size">General</span>
-                    <input type="radio" value="2" v-model="level"> <span id="m-size">Important</span>
-                    <input type="radio" value="3" v-model="level"> <span id="l-size">Emergent</span>
+                    <p>Level:</p>
+                    <p><input type="radio" value="1" v-model="level"> <span id="s-size">General</span></p>
+                    <p><input type="radio" value="2" v-model="level"> <span id="m-size">Important</span></p>
+                    <p><input type="radio" value="3" v-model="level"> <span id="l-size">Emergent</span></p>
                 </div>
 
             </div>
@@ -121,7 +122,7 @@ export default {
                         alert(res.data.message)
                         this.msg = res.data.message
                         this.$router.push({
-                            path: '/TaskList',
+                            path: '/Calendar',
                             replace: true
                             });
                     }else{
@@ -142,7 +143,7 @@ export default {
         },
         backToTaskList() {
             this.$router.push({
-                path: '/TaskList',
+                path: '/Calendar',
                 replace: true
             });
         }
@@ -194,5 +195,71 @@ li {
 }
 a {
   color: #42b983;
+}
+p{
+    text-align: left;
+}
+
+#temp{
+    margin-top:200%;
+    margin-left:-10%;
+    /* border:1px solid red; */
+    width:120%;
+}
+
+.title{
+    font-size:20px;
+    position:relative;
+    float:left;
+    margin-top:2%;
+}
+.t1{
+    margin-left:10%
+}
+.t2{
+    font-size:16px;
+}
+
+.cancel, .done{
+    background-color:white;
+    border:none;
+    font-size:18px;
+    outline: none;
+}
+.cancel{
+    color:grey;
+    margin-left:10%
+}
+.done{
+    color: #11C7BA;
+}
+.underline{
+    margin-top: 5%
+}
+.u1{
+    margin-top:10%;
+}
+.u2 input{
+    height:60px;
+}
+.u3 input{
+    background-color:#F5F8F7;
+}
+.underline input{
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #ccc;
+    width:290px;
+    height:36px;
+}
+.u3 input:focus{
+    box-shadow: 0 0 4px 1px #11C7BA;
+}
+.radio{
+    position:relative;
+    display:inline-block;
+    font-size:12px;
+    /* border:1px solid red; */
+    width:110%;
 }
 </style>

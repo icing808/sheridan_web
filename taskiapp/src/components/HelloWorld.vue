@@ -21,6 +21,34 @@
 
 
       <!-- TODO: Add statement when have tasks -->
+      <div id="title1">On Going Tasks</div>
+      <div>
+          {{msg}}
+            <b-card-text>
+              <div class="container" v-show="showAll">
+                  <div  v-for="item in array" :key="item._id">
+                    <div class="list">
+                        <div class="title-pri">
+                        <h3 id="title">Title: {{item.title}}</h3>
+                        <p class="gen" id="priority" v-if="1 === item.level" > General</p>
+                        <p class="med" id="priority" v-else-if="2 === item.level" >Important</p>
+                        <p class="emg" id="priority" v-else-if="3 === item.level" >Emergent</p>
+                        <p class="low" id="priority" v-else>Low Priority</p>
+                        </div>
+                        <div class="col-md-12 duetime">
+                            <img id="timeicon" src="../assets/tasks-duetime-icon.png"> 
+                            {{item.start_time}} ~
+                            {{item.end_time}} 
+                        </div>
+                        <div class="col-md-12">
+                            <button v-if="1 === item.status" @click="updateStatus(item._id, 2)" class="btn btn-success btn-sm" > Done </button>
+                            <button v-if="0 === item.status || 1 === item.status" @click="updateStatus(item._id, 3)" class="btn btn-warning btn-sm" > Cancel </button>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+            </b-card-text>
+      </div>
 
       <!-- Footer -->
       <div class="footer-container">
@@ -111,9 +139,7 @@ export default {
             level: '',
             array: [],
             showAll: false,
-            show: false,
-            // charts: '',
-            opinion:['Pending', 'On going', 'Completed', 'Ignore', 'Expired']           
+            show: false          
         }
     },
     methods:{
@@ -145,7 +171,7 @@ export default {
                         alert(res.data.message)
                         this.msg = res.data.message
                         this.$router.push({
-                            path: '/TaskList',
+                            path: '/Calendar',
                             replace: true
                             });
                     }else{
@@ -172,6 +198,45 @@ export default {
             path: '/Login',
             replace: true
           });
+        },
+        updateStatus(ids, uStatus){
+            let params = {
+                id: ids,
+                status: uStatus,
+                userId: this.GLOBAL.userId
+            }
+            this.$http.post('/api/task/updateStatus',params).then((res) => {
+                console.log(res)
+                console.log(res.data)
+                if(res.data.status != null && 1000 != res.data.status){
+                    this.msg = res.data.message
+                    alert(this.msg)
+                }else{
+                    //this.array = res.data
+                    this.getAll(1);
+                }
+            }).catch((err) => {
+                console.log(err)
+            })
+        },
+        getAll: function(statusId){
+            let params = {
+                status: statusId,
+                userId: this.GLOBAL.userId
+            }
+            this.$http.post('/api/task/all', params).then((res) => {
+                console.log(res)
+                if(res.data.length>0){
+                    this.showAll = true
+                    this.array = res.data
+                    this.msg = ""
+                }else{
+                    this.msg = "No any task！"
+                    this.array = []
+                }
+            }).catch((err) => {
+                console.log(err)
+            })
         }
     },
     created() {
@@ -183,6 +248,7 @@ export default {
                 replace: true
               });
           }
+          this.getAll(1);
     }
 }
 </script>
@@ -316,8 +382,10 @@ p{
 }
 
 .footer{
+  width:100%;
   position:fixed;
-  bottom: 2%;
+  bottom: 0;
+  background-color: white;
   /* margin-left:8%; */
 }
 
@@ -327,5 +395,72 @@ p{
   margin:0 20px;
   background-color: white;
   border:none;
+}
+
+.list{
+  padding-top: 2%;
+  padding-bottom: 2%;
+  margin-bottom:6%;
+  margin-left: 2%;
+  margin-right: 2%;
+  width:90%;
+  /* height: 80px; */
+  /* border:1px solid red; */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.04), 0 4px 4px 0 rgba(0, 0, 0, 0.04);
+}
+.list2{
+  padding-top: 2%;
+  padding-bottom: 2%;
+  margin-bottom:4%;
+  margin-left: 4%;
+  margin-right: 4%;
+  width:80%;
+  /* height: 80px; */
+  /* border:1px solid red; */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.04), 0 4px 4px 0 rgba(0, 0, 0, 0.04);
+}
+#title1{
+  font-size:20px;
+  font-weight: 800;
+  margin-top: 4%;
+  margin-bottom:4%;
+  margin-left:-40%;
+
+}
+.title-pri{
+  /* border:1px solid red; */
+  width:280px;
+  text-align: left;
+  flex-direction: row;
+  display: inline-block;
+}
+#title{
+ font-size:18px;
+ font-weight:800;
+}
+#priority{
+  float: right;
+  margin-top: -10%;
+}
+.gen{
+    color:#464545;
+    font-weight: 600;
+}
+.low{
+    color:#76EDE0;
+    font-weight: 600;
+}
+.emg{
+    color:#F79846;
+    font-weight: 600;
+}
+.med{
+    color:#B972B6;
+    font-weight: 600;
+}
+.duetime{
+  font-weight: 600;
+  margin-bottom:2%;
+  color: #6D6B6B;
 }
 </style>

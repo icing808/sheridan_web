@@ -6,7 +6,7 @@ const router = express.Router();
 router.post('/api/task/addTask',(req,res) => {
 	//there req.body In fact, the body parser middleware is used to parse the data sent by the front end
 	//Query status（0:pending； 1:ongoing； 2:finish； 3:ignore； 4:expire ）
-	models.Task.find({start_time: req.body.startTime, end_time: req.body.endTime, status: { $ne : 3 || 4}},(err,data) => {
+	models.Task.find({user_id: req.body.userId, start_time: req.body.startTime, end_time: req.body.endTime, status: { $ne : 3 || 4}},(err,data) => {
 		if(err){
 			res.send({'status': 1002, 'message': 'Failure to query database!', 'data': err});
 		}else{
@@ -87,18 +87,19 @@ router.post('/api/task/updateStatus',(req,res) => {
                         if (err2) {
                             res.send(err2);
                         } else {
-                            let qStatus = req.body.q_status
-                            if(qStatus == -1){
-                                qStatus = { $in:[0, 1, 2, 3, 4]}
-                            }
-                            models.Task.find({status: qStatus},(err3,data3) => {
-                                console.log('updateStatus find', data3.length)
-                                if (err3) {
-                                    res.send(err3);
-                                } else {
-                                    res.send(data3);
-                                }
-                            });
+                            // let qStatus = req.body.q_status
+                            // if(qStatus == -1){
+                            //     qStatus = { $in:[0, 1, 2, 3, 4]}
+                            // }
+                            // models.Task.find({user_id: req.body.userId, status: qStatus},(err3,data3) => {
+                            //     console.log('updateStatus find', data3.length)
+                            //     if (err3) {
+                            //         res.send(err3);
+                            //     } else {
+                            //         res.send(data3);
+                            //     }
+                            // });
+                            res.send({'status': 1000, 'message': 'Update success ' , 'data': data2});
                         }
                     });
 
@@ -151,20 +152,20 @@ router.post('/api/task/getTask',(req,res) => {
 //delete task
 router.post('/api/task/delete',(req,res) => {
     models.Task.remove({_id: req.body.id},(err,data) => {
-        // if (err) {
-        //     //res.send(err);
-        //     res.send({'status': 1004, 'message': 'Delete failure!', 'data': err});
-        // } else {
-        // 	res.send({'status': 1003, 'message': 'Delete successful!', 'data': data});
+        if (err) {
+            //res.send(err);
+            res.send({'status': 1004, 'message': 'Delete failure!', 'data': err});
+        } else {
+        	res.send({'status': 1003, 'message': 'Delete successful!', 'data': data});
 
-        // }
-        models.Task.find((err1,data1) => {
-            if (err1) {
-                console.log(err1)
-            } else {
-                res.send({'status': 1000, 'message': 'Update successful！', 'data': data1});
-            }
-        });
+        }
+        // models.Task.find({user_id: req.body.userId}, (err1,data1) => {
+        //     if (err1) {
+        //         console.log(err1)
+        //     } else {
+        //         res.send({'status': 1000, 'message': 'Update successful！', 'data': data1});
+        //     }
+        // });
     });
     
 });

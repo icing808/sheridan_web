@@ -8,10 +8,10 @@
     <div>
       <div id="title1">Tasks</div>
       <div>
+        {{msg}}
             <b-card-text>
-              <input type="hidden" v-model="q_status">
               <div class="container" v-show="showAll">
-                  <div  v-for="item in array" :key="item._id">
+                  <div  v-for="item in array1" :key="item._id">
                     <!-- <b-form-checkbox
                         class="set-status c1"
                         size="lg"
@@ -26,31 +26,23 @@
 
                     <div class="title-pri">
                     <h3 id="title">Title: {{item.title}}</h3>
-                    <p id="priority" v-if="1 === item.level" > General</p>
+                    <p class="gen" id="priority" v-if="1 === item.level" > General</p>
                     <p class="med" id="priority" v-else-if="2 === item.level" >Important</p>
                     <p class="emg" id="priority" v-else-if="3 === item.level" >Emergent</p>
                     <p class="low" id="priority" v-else>Low Priority</p>
                     </div>
-                    <p id="duetime">
-                      <img id="timeicon" src="../assets/tasks-duetime-icon.png">  
-                      {{item.end_time}}
-                    </p>
+                    <div class="col-md-12 duetime">
+                          <img id="timeicon" src="../assets/tasks-duetime-icon.png"> 
+                          {{item.start_time}} ~
+                          {{item.end_time}} 
                     </div>
-
-                    <!-- <div class="btns">
-                        <div v-if="0 === item.status">
-                            <button id="btn2" @click="updateTask(item._id)">Edit</button>
-                        </div>
-                        <div v-if="0 === item.status || 1 === item.status">
-                            <button id="btn1" @click="updateStatus(item._id, 3)">Cancel</button>
-                        </div>
-                        <div v-if="1 === item.status">
-                            <button id="btn2" @click="updateStatus(item._id, 2)">Done</button>
-                        </div>
-                        <div v-if="0 === item.status || 3 === item.status || 4 === item.status">
-                            <button id="btn1" @click="deleteone(item._id)">Delete</button>
-                        </div>
-                    </div> -->
+                      <div class="col-md-12">
+                          <button v-if="0 === item.status" @click="updateTask(item._id)" class="btn btn-primary btn-sm" > Edit </button>
+                          <button v-if="1 === item.status" @click="updateStatus(item._id, 2)" class="btn btn-success btn-sm" > Done </button>
+                          <button v-if="0 === item.status || 1 === item.status" @click="updateStatus(item._id, 3)" class="btn btn-warning btn-sm" > Cancel </button>
+                          <button v-if="0 === item.status || 3 === item.status || 4 === item.status" @click="deleteone(item._id)" class="btn btn-danger btn-sm" > Delete </button>
+                      </div>
+                    </div>
                   </div>
               </div>
             </b-card-text>
@@ -59,19 +51,22 @@
       <div id="title2">Completed</div>
       <div>
           <b-card-text>
-            <input type="hidden" v-model="q_status">
             <div v-show="showAll">
-                <div v-for="item in array" :key="item._id">
+                <div v-for="item in array2" :key="item._id">
                     <div class="list2">
                         <div class="title-pri">
                         <!-- <img id="completed" src="../assets/checked.png"> -->
                         <h3 id="title">{{item.title}}</h3>
-                        <p id="priority" v-if="1 === item.level" >General</p>
+                        <p class="gen" id="priority" v-if="1 === item.level" >General</p>
                         <p class="med" id="priority" v-else-if="2 === item.level" >Important</p>
                         <p class="emg" id="priority" v-else-if="3 === item.level" >Emergent</p>
                         <p class="low" id="priority" v-else>Low Priority</p>
                         </div>
-                        <p id="duetime"><img id="timeicon" src="../assets/tasks-duetime-icon.png"> {{item.end_time}}</p>
+                        <div class="col-md-12 duetime">
+                          <img id="timeicon" src="../assets/tasks-duetime-icon.png"> 
+                          {{item.start_time}} ~
+                          {{item.end_time}} 
+                        </div>
                     </div>
                 </div>
             </div>
@@ -103,15 +98,55 @@ export default {
   data () {
     return {
       state: 'normal',
-      array: [],
+      array1: [],
+      array2: [],
       showAll: false,
-      status:'not_accepted',
-      q_status: ''
+      status:'not_accepted'
     }
   },
   methods: {
+    updateTask(tId){
+        this.$router.push({
+            path: '/AddTask2?tId='+tId,
+            replace: true
+        });
+    },
+    deleteone(ids){
+        let params = {
+            id: ids,
+            userId: this.GLOBAL.userId
+        }
+        this.$http.post('/api/task/delete',params).then((res) => {
+            console.log(res)
+            //this.array = res.data.data
+            this.getAll(-1);
+            this.getAll(2);
+        }).catch((err) => {
+            console.log(err)
+        })
+    },
+    updateStatus(ids, uStatus){
+        let params = {
+            id: ids,
+            status: uStatus,
+            userId: this.GLOBAL.userId
+        }
+        this.$http.post('/api/task/updateStatus',params).then((res) => {
+            console.log(res)
+            console.log(res.data)
+            if(res.data.status != null && 1000 != res.data.status){
+                this.msg = res.data.message
+                alert(this.msg)
+            }else{
+                //this.array = res.data
+                this.getAll(-1);
+                this.getAll(2);
+            }
+        }).catch((err) => {
+            console.log(err)
+        })
+    },
     getAll: function(statusId){
-      this.q_status = statusId;
       let params = {
           status: statusId,
           userId: this.GLOBAL.userId
@@ -120,11 +155,19 @@ export default {
           console.log(res)
           if(res.data.length>0){
               this.showAll = true
-              this.array = res.data
+              if(2 == statusId){
+                this.array2 = res.data
+              }else{
+                this.array1 = res.data
+              }
               this.msg = ""
           }else{
               this.msg = "No any task！"
-              this.array = []
+              if(2 == statusId){
+                this.array2 = []
+              }else{
+                this.array1 = []
+              }
           }
       }).catch((err) => {
           console.log(err)
@@ -132,6 +175,13 @@ export default {
     }
   },
   created(){
+    if(this.GLOBAL.userId == '' ){
+        alert("Please Sign In");
+        this.$router.push({
+          path: '/Login',
+          replace: true
+        });
+    }
     this.getAll(-1);
     this.getAll(2);
   }
@@ -162,6 +212,10 @@ export default {
  font-size:18px;
  font-weight:800;
 }
+.gen{
+    color:#464545;
+    font-weight: 600;
+}
 .low{
     color:#76EDE0;
     font-weight: 600;
@@ -180,26 +234,30 @@ export default {
 }
 .list{
   padding-top: 2%;
+  padding-bottom: 2%;
   margin-bottom:6%;
-  margin-left: 1%;
-  width:340px;
-  height: 80px;
+  margin-left: 4%;
+  margin-right: 4%;
+  width:80%;
+  /* height: 80px; */
   /* border:1px solid red; */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.04), 0 4px 4px 0 rgba(0, 0, 0, 0.04);
 }
 .list2{
   padding-top: 2%;
+  padding-bottom: 2%;
   margin-bottom:4%;
   margin-left: 4%;
-  width:340px;
-  height: 80px;
+  margin-right: 4%;
+  width:80%;
+  /* height: 80px; */
   /* border:1px solid red; */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.04), 0 4px 4px 0 rgba(0, 0, 0, 0.04);
 }
-#duetime{
-  position: relative;
-  left:-25%;
+.duetime{
   font-weight: 600;
+  margin-bottom:2%;
+  color: #6D6B6B;
 }
 .footer-container{
    width:100%;
