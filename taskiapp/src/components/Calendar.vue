@@ -6,13 +6,13 @@
     ></b-calendar>
 
     <div>
-      <div>Tasks</div>
+      <div id="title1">Tasks</div>
       <div>
             <b-card-text>
               <input type="hidden" v-model="q_status">
               <div class="container" v-show="showAll">
                   <div  v-for="item in array" :key="item._id">
-                    <b-form-checkbox
+                    <!-- <b-form-checkbox
                         class="set-status c1"
                         size="lg"
                         id="checkbox-1"
@@ -21,7 +21,7 @@
                         value="completed"
                         unchecked-value="not_completed"
                         >
-                    </b-form-checkbox>
+                    </b-form-checkbox> -->
                     <div class="list">
 
                     <div class="title-pri">
@@ -56,20 +56,22 @@
             </b-card-text>
       </div>
 
-      <div>Completed</div>
+      <div id="title2">Completed</div>
       <div>
           <b-card-text>
             <input type="hidden" v-model="q_status">
             <div v-show="showAll">
                 <div v-for="item in array" :key="item._id">
-                    <div>
-                        <img id="completed" src="../assets/checked.png">
+                    <div class="list2">
+                        <div class="title-pri">
+                        <!-- <img id="completed" src="../assets/checked.png"> -->
                         <h3 id="title">{{item.title}}</h3>
                         <p id="priority" v-if="1 === item.level" >General</p>
-                        <p id="priority" v-else-if="2 === item.level" >Important</p>
-                        <p id="priority" v-else-if="3 === item.level" >Emergent</p>
-                        <p id="priority" v-else>Low Priority</p>
-                        <p id="duetime"><img id="timeicon" src="../assets/tasks-duetime-icon.png">  {{item.end_time}}</p>
+                        <p class="med" id="priority" v-else-if="2 === item.level" >Important</p>
+                        <p class="emg" id="priority" v-else-if="3 === item.level" >Emergent</p>
+                        <p class="low" id="priority" v-else>Low Priority</p>
+                        </div>
+                        <p id="duetime"><img id="timeicon" src="../assets/tasks-duetime-icon.png"> {{item.end_time}}</p>
                     </div>
                 </div>
             </div>
@@ -103,6 +105,7 @@ export default {
       state: 'normal',
       array: [],
       showAll: false,
+      status:'not_accepted',
       q_status: ''
     }
   },
@@ -136,6 +139,68 @@ export default {
 </script>
 
 <style scoped>
+#title1,#title2{
+  font-size:20px;
+  font-weight: 800;
+  margin-top: 4%;
+  margin-bottom:4%;
+  margin-left:-60%;
+
+}
+#title2{
+  margin-left:-52%;
+  margin-top: 8%;
+}
+.title-pri{
+  /* border:1px solid red; */
+  width:280px;
+  text-align: left;
+  flex-direction: row;
+  display: inline-block;
+}
+#title{
+ font-size:18px;
+ font-weight:800;
+}
+.low{
+    color:#76EDE0;
+    font-weight: 600;
+}
+.emg{
+    color:#F79846;
+    font-weight: 600;
+}
+.med{
+    color:#B972B6;
+    font-weight: 600;
+}
+#priority{
+  float: right;
+  margin-top: -10%;
+}
+.list{
+  padding-top: 2%;
+  margin-bottom:4%;
+  margin-left: 1%;
+  width:340px;
+  height: 80px;
+  /* border:1px solid red; */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.04), 0 4px 4px 0 rgba(0, 0, 0, 0.04);
+}
+.list2{
+  padding-top: 2%;
+  margin-bottom:4%;
+  margin-left: 4%;
+  width:340px;
+  height: 80px;
+  /* border:1px solid red; */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.04), 0 4px 4px 0 rgba(0, 0, 0, 0.04);
+}
+#duetime{
+  position: relative;
+  left:-25%;
+  font-weight: 600;
+}
 .footer-container{
    width:100%;
    /* border:1px solid red; */
