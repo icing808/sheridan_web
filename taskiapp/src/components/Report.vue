@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <b-button variant="outline-primary" @click="$router.go(-1)">
+      <b-button variant="light" @click="$router.go(-1)">
             <img id="back" src="../assets/back.png">
       </b-button>
     </div>
